@@ -452,6 +452,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1aa8c8b2792c487cbd7004407aa5a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundChecker: {fileID: 373006978}
+  distToGround: 0.4
+  wallChecker: {fileID: 666610580}
+  distToWall: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   moveSpeed: 8
   jumpForce: 12
   dashCoolDown: 5
@@ -462,13 +469,6 @@ MonoBehaviour:
   - {x: 3, y: 1.5}
   - {x: 1, y: 2.5}
   - {x: 4, y: 1.5}
-  groundChecker: {fileID: 373006978}
-  distToGround: 0.4
-  wallChecker: {fileID: 666610580}
-  distToWall: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &373006977
 GameObject:
   m_ObjectHideFlags: 0

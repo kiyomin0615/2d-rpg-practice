@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     public bool isDoingSomething { get; private set; }
 
@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public float jumpForce = 12f;
 
     [Header("Dash")]
-    [SerializeField] private float dashCoolDown = 5f;
+    [SerializeField] private float dashCoolDown = 2f;
     [SerializeField] private float dashTimer = 0f;
     public float dashSpeed = 25f;
     public float dashDuration = 0.2f;
@@ -19,21 +19,6 @@ public class Player : MonoBehaviour
 
     [Header("Attack")]
     public Vector2[] attackVelocityList;
-
-    [Header("Collision")]
-    [SerializeField] Transform groundChecker;
-    [SerializeField] float distToGround;
-    [SerializeField] Transform wallChecker;
-    [SerializeField] float distToWall;
-    [SerializeField] LayerMask groundLayer;
-
-    public int facingDir { get; private set; } = 1;
-    private bool facingRight = true;
-
-    #region Components
-    public Animator animator { get; private set; }
-    public Rigidbody2D rb { get; private set; }
-    #endregion
 
     #region State
     public PlayerStateMachine stateMachine { get; private set; }
@@ -47,8 +32,10 @@ public class Player : MonoBehaviour
     public PlayerAttackState attackState { get; private set; }
     #endregion
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         stateMachine = new PlayerStateMachine();
 
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
@@ -61,15 +48,17 @@ public class Player : MonoBehaviour
         attackState = new PlayerAttackState(this, stateMachine, "Attack");
     }
 
-    private void Start()
+    protected override void Start()
     {
-        animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+        base.Start();
+
         stateMachine.Init(idleState);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         stateMachine.currentState.Update();
         CheckDashInput();
     }
@@ -98,40 +87,6 @@ public class Player : MonoBehaviour
                 dashDir = facingDir;
             stateMachine.ChangeState(dashState);
         }
-    }
-
-    public void SetVelocity(float _xVelocity, float _yVelocity)
-    {
-        rb.velocity = new Vector2(_xVelocity, _yVelocity);
-        ControlFlip(_xVelocity);
-    }
-
-    public bool IsGroundDetected()
-    {
-       return Physics2D.Raycast(groundChecker.position, Vector2.down, distToGround, groundLayer);
-    }
-
-    public bool IsWallDetected()
-    {
-       return Physics2D.Raycast(wallChecker.position, Vector2.right * facingDir, distToWall, groundLayer);
-    }
-
-    public void ControlFlip(float _xInput)
-    {
-        if ((_xInput > 0 && !facingRight) || (_xInput < 0 && facingRight))
-            Flip();
-    }
-
-    public void Flip()
-    {
-        facingDir = -facingDir;
-        facingRight = !facingRight;
-        transform.Rotate(0, 180, 0);
-    }
-
-    private void OnDrawGizmos() {
-        Gizmos.DrawLine(groundChecker.position, new Vector2(groundChecker.position.x, groundChecker.position.y - distToGround));
-        Gizmos.DrawLine(wallChecker.position, new Vector2(wallChecker.position.x + distToWall, wallChecker.position.y));
     }
 
     public void TriggerAnimationEvent()
