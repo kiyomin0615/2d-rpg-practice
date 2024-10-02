@@ -10,11 +10,6 @@ A single rpg game practice with C# and Unity
 4. Wall Jump & Wall Slide
 5. Basic attack combo
 
-## Camera
-1. Player tracking
-2. Zoom In & Zoom Out
-- TODO
-
 ## Enemy
 - TODO
 
