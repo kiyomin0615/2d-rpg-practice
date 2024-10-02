@@ -14,6 +14,13 @@ public class EnemyState
     protected float yInput;
     private string animatorParam;
 
+    public EnemyState(Enemy _enemy, EnemyStateMachine _enemyStateMachine, string _animatorParam)
+    {
+        this.enemy = _enemy;
+        this.enemyStateMachine = _enemyStateMachine;
+        this.animatorParam = _animatorParam;
+    }
+
     public virtual void Enter()
     {
         enemy.animator.SetBool(animatorParam, true);
@@ -24,9 +31,6 @@ public class EnemyState
     public virtual void Update()
     {
         stateTimer -= Time.deltaTime;
-        xInput = Input.GetAxisRaw("Horizontal");
-        yInput = Input.GetAxisRaw("Vertical");
-        enemy.animator.SetFloat("yVelocity", enemyRb.velocity.y);
     }
 
     public virtual void Exit()
