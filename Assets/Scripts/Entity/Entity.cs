@@ -68,5 +68,4 @@ public class Entity : MonoBehaviour
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
         ControlFlip(_xVelocity);
     }
-
 }

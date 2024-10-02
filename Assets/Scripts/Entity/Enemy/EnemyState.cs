@@ -7,12 +7,13 @@ public class EnemyState
     protected Enemy enemy;
     protected Rigidbody2D enemyRb;
     protected EnemyStateMachine enemyStateMachine;
-    protected bool animationEventTriggered;
 
     protected float stateTimer;
     protected float xInput;
     protected float yInput;
     private string animatorParam;
+
+    protected bool animationEventTriggered;
 
     public EnemyState(Enemy _enemy, EnemyStateMachine _enemyStateMachine, string _animatorParam)
     {
@@ -38,7 +39,7 @@ public class EnemyState
         enemy.animator.SetBool(animatorParam, false);
     }
 
-    public virtual void TriggerAnimationEventOnState()
+    public virtual void OnAnimationEvent()
     {
         animationEventTriggered = true;
     }

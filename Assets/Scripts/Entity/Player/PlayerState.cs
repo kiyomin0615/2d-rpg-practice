@@ -7,12 +7,13 @@ public class PlayerState
     protected Player player;
     protected Rigidbody2D playerRb;
     protected PlayerStateMachine playerStateMachine;
-    protected bool animationEventTriggered;
 
     protected float stateTimer;
     protected float xInput;
     protected float yInput;
     private string animatorParam;
+
+    protected bool animationEventTriggered;
 
     public PlayerState(Player _player, PlayerStateMachine _playerStateMachine, string _animatorParam)
     {
@@ -41,7 +42,7 @@ public class PlayerState
         player.animator.SetBool(animatorParam, false);
     }
 
-    public virtual void TriggerAnimationEventOnState()
+    public virtual void OnAnimationEvent()
     {
         animationEventTriggered = true;
     }

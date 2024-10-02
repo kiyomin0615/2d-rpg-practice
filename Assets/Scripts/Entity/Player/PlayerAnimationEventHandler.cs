@@ -13,6 +13,6 @@ public class PlayerAnimationEventHandler : MonoBehaviour
 
     private void HandleAnimationEvent()
     {
-        playerComponent.TriggerAnimationEvent();
+        playerComponent.OnAnimationEvent();
     }
 }

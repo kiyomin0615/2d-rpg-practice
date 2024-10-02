@@ -8,7 +8,7 @@ public class Player : Entity
 
     [Header("Move")]
     public float moveSpeed = 8f;
-    public float jumpForce = 12f;
+    public float jumpForce = 16f;
 
     [Header("Dash")]
     [SerializeField] private float dashCoolDown = 2f;
@@ -89,9 +89,8 @@ public class Player : Entity
         }
     }
 
-    public void TriggerAnimationEvent()
+    public void OnAnimationEvent()
     {
-        stateMachine.currentState.TriggerAnimationEventOnState();
+        stateMachine.currentState.OnAnimationEvent();
     }
-    
 }
