@@ -9,12 +9,14 @@ public class Enemy : Entity
     [Header("Move")]
     public float moveSpeed = 3f;
     public float idleDuration = 2f;
-    public float battleDuration = 5f;
 
-    [Header("Attack")]
+
+    [Header("Battle")]
     public float battleRange = 10f;
+    public float battleDuration = 5f;
     public float attackRange = 3f;
     public float attackCooldown = 1f;
+    public float stunDuration = 1f;
 
     #region State
     public EnemyStateMachine stateMachine { get; private set; }

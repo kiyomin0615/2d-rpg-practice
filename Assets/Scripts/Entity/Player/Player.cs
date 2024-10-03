@@ -17,7 +17,7 @@ public class Player : Entity
     public float dashDuration = 0.2f;
     public float dashDir { get; private set; }
 
-    [Header("Attack")]
+    [Header("Battle")]
     public Vector2[] attackVelocityList;
 
     #region State

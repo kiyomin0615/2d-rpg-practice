@@ -20,4 +20,12 @@ public class EntityEffects : MonoBehaviour
 
         spriteRenderer.material = original;
     }
+
+    public void EnterStunEffect() {
+        spriteRenderer.color = Color.red;
+    }
+
+    public void ExitStunEffect() {
+        spriteRenderer.color = Color.white;
+    }
 }

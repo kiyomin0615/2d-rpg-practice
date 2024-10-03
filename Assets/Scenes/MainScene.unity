@@ -349,10 +349,11 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 3
   idleDuration: 2
-  battleDuration: 5
   battleRange: 10
+  battleDuration: 5
   attackRange: 3
   attackCooldown: 1
+  stunDuration: 1
 --- !u!61 &130827535
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1425,10 +1426,11 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 3
   idleDuration: 2
-  battleDuration: 5
   battleRange: 10
+  battleDuration: 5
   attackRange: 3
   attackCooldown: 1
+  stunDuration: 1
 --- !u!4 &844873392
 Transform:
   m_ObjectHideFlags: 0
