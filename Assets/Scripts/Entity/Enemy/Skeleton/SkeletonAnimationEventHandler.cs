@@ -11,6 +11,14 @@ public class SkeletonAnimationEventHandler : MonoBehaviour
         enemyComponent = GetComponentInParent<Enemy>();
     }
 
+    private void OnEnterCounterAttack() {
+        enemyComponent.EnableCounterAttack();
+    }
+
+    private void OnExitCounterAttack() {
+        enemyComponent.DisableCounterAttack();
+    }
+
     private void OnExitAnimation()
     {
         enemyComponent.OnExitAnimation();

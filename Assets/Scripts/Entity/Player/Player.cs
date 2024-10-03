@@ -19,6 +19,7 @@ public class Player : Entity
 
     [Header("Battle")]
     public Vector2[] attackVelocityList;
+    public float counterAttackDuration;
 
     #region State
     public PlayerStateMachine stateMachine { get; private set; }
@@ -30,6 +31,7 @@ public class Player : Entity
     public PlayerWallJumpState wallJumpState { get; private set; }
     public PlayerDashState dashState { get; private set; }
     public PlayerAttackState attackState { get; private set; }
+    public PlayerCounterAttackState counterAttackState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -46,6 +48,7 @@ public class Player : Entity
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
         dashState = new PlayerDashState(this, stateMachine, "Dash");
         attackState = new PlayerAttackState(this, stateMachine, "Attack");
+        counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
     }
 
     protected override void Start()

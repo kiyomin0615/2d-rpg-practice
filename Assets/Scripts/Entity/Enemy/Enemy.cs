@@ -14,9 +14,10 @@ public class Enemy : Entity
     [Header("Battle")]
     public float battleRange = 10f;
     public float battleDuration = 5f;
-    public float attackRange = 3f;
+    public float attackRange = 2.25f;
     public float attackCooldown = 1f;
     public float stunDuration = 1f;
+    public bool canBeStunned = false;
 
     #region State
     public EnemyStateMachine stateMachine { get; private set; }
@@ -56,5 +57,13 @@ public class Enemy : Entity
     public void OnExitAnimation()
     {
         stateMachine.currentState.OnExitAnimation();
+    }
+
+    public virtual void EnableCounterAttack() {
+        canBeStunned = false;
+    }
+
+    public virtual void DisableCounterAttack() {
+        canBeStunned = true;
     }
 }

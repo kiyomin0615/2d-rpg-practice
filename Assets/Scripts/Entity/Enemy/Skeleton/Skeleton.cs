@@ -40,6 +40,8 @@ public class Skeleton : Enemy
     public override void TakeDamage() {
         base.TakeDamage();
 
-        this.stateMachine.ChangeState(this.stunState);
+        if (canBeStunned) {
+            stateMachine.ChangeState(stunState);
+        }
     }
 }
