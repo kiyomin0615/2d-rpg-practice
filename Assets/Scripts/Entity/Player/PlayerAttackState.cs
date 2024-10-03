@@ -16,6 +16,8 @@ public class PlayerAttackState : PlayerState
     {
         base.Enter();
 
+        xInput = 0;
+
         if (comboCounter > 2 || Time.time >= lastAttackTime + comboDuration)
             comboCounter = 0;
 
