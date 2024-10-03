@@ -28,8 +28,9 @@ public class SkeletonAnimationEventHandler : MonoBehaviour
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(enemyComponent.attackChecker.position, enemyComponent.attackCheckerRadius);
 
         foreach(Collider2D hitCollider in hitColliders) {
-            if (hitCollider.GetComponent<Player>() != null) {
-                hitCollider.GetComponent<Player>().TakeDamage();
+            Player playerComponent = hitCollider.GetComponent<Player>();
+            if (playerComponent != null) {
+                playerComponent.TakeDamage();
             }
         }
     }

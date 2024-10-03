@@ -60,10 +60,10 @@ public class Enemy : Entity
     }
 
     public virtual void EnableCounterAttack() {
-        canBeStunned = false;
+        canBeStunned = true;
     }
 
     public virtual void DisableCounterAttack() {
-        canBeStunned = true;
+        canBeStunned = false;
     }
 }

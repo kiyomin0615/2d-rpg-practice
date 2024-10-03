@@ -41,6 +41,7 @@ public class Skeleton : Enemy
         base.TakeDamage();
 
         if (canBeStunned) {
+            animator.SetBool("Stun", true);
             stateMachine.ChangeState(stunState);
         }
     }

@@ -19,7 +19,6 @@ public class Player : Entity
 
     [Header("Battle")]
     public Vector2[] attackVelocityList;
-    public float counterAttackDuration;
 
     #region State
     public PlayerStateMachine stateMachine { get; private set; }

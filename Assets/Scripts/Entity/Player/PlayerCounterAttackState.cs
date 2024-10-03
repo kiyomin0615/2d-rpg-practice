@@ -11,18 +11,15 @@ public class PlayerCounterAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
-        stateTimer = player.counterAttackDuration;
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (stateTimer < 0)
-            player.SetVelocity(0, 0);
+        player.SetVelocity(0, 0);
 
-        if (stateTimer < 0 || animationFinished) {
+        if (animationFinished) {
           playerStateMachine.ChangeState(player.idleState);
         }
     }
