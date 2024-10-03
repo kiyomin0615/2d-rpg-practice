@@ -7,6 +7,7 @@ public class Entity : MonoBehaviour
     #region Components
     public Animator animator { get; private set; }
     public Rigidbody2D rb { get; private set; }
+    public EntityEffects effects { get; private set; }
     #endregion
 
     [Header("Collision")]
@@ -30,6 +31,7 @@ public class Entity : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        effects = GetComponent<EntityEffects>();
     }
 
     protected virtual void Update()
@@ -74,5 +76,6 @@ public class Entity : MonoBehaviour
 
     public virtual void TakeDamage() {
         Debug.Log($"{gameObject.name} got damaged.");
+        effects.StartCoroutine("ApplyHitEffect");
     }
 }
