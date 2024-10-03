@@ -13,7 +13,7 @@ public class Enemy : Entity
 
     [Header("Attack")]
     public float battleRange = 10f;
-    public float attackRange = 1.5f;
+    public float attackRange = 3f;
     public float attackCooldown = 1f;
 
     #region State
@@ -51,8 +51,8 @@ public class Enemy : Entity
         return Physics2D.Raycast(wallChecker.position, Vector2.right * facingDir, battleRange, playerLayer);
     }
     
-    public void OnAnimationEvent()
+    public void OnExitAnimation()
     {
-        stateMachine.currentState.OnAnimationEvent();
+        stateMachine.currentState.OnExitAnimation();
     }
 }

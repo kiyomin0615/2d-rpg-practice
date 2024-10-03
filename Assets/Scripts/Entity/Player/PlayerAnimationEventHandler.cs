@@ -11,8 +11,18 @@ public class PlayerAnimationEventHandler : MonoBehaviour
         playerComponent = GetComponentInParent<Player>();
     }
 
-    private void HandleAnimationEvent()
+    private void OnExitAnimation()
     {
-        playerComponent.OnAnimationEvent();
+        playerComponent.OnExitAnimation();
+    }
+
+    private void OnHit() {
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(playerComponent.attackChecker.position, playerComponent.attackCheckerRadius);
+
+        foreach(Collider2D hitCollider in hitColliders) {
+            if (hitCollider.GetComponent<Enemy>() != null) {
+                hitCollider.GetComponent<Enemy>().TakeDamage();
+            }
+        }
     }
 }

@@ -15,6 +15,8 @@ public class Entity : MonoBehaviour
     [SerializeField] protected Transform wallChecker;
     [SerializeField] protected float distToWall;
     [SerializeField] protected LayerMask groundLayer;
+    public Transform attackChecker;
+    public float attackCheckerRadius;
 
     public int facingDir { get; private set; } = 1;
     protected bool facingRight = true;
@@ -48,6 +50,7 @@ public class Entity : MonoBehaviour
     protected virtual void OnDrawGizmos() {
         Gizmos.DrawLine(groundChecker.position, new Vector2(groundChecker.position.x, groundChecker.position.y - distToGround));
         Gizmos.DrawLine(wallChecker.position, new Vector2(wallChecker.position.x + (distToWall * facingDir), wallChecker.position.y));
+        Gizmos.DrawWireSphere(attackChecker.position, attackCheckerRadius);
     }
 
     public virtual void ControlFlip(float _xInput)
@@ -67,5 +70,9 @@ public class Entity : MonoBehaviour
     {
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
         ControlFlip(_xVelocity);
+    }
+
+    public virtual void TakeDamage() {
+        Debug.Log($"{gameObject.name} got damaged.");
     }
 }

@@ -38,7 +38,7 @@ public class PlayerAttackState : PlayerState
         if (stateTimer < 0)
             player.SetVelocity(0, 0);
 
-        if (animationEventTriggered)
+        if (animationFinished)
             playerStateMachine.ChangeState(player.idleState);
     }
 

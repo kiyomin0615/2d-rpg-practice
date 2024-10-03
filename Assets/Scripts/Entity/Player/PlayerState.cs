@@ -13,7 +13,7 @@ public class PlayerState
     protected float yInput;
     private string animatorParam;
 
-    protected bool animationEventTriggered;
+    protected bool animationFinished;
 
     public PlayerState(Player _player, PlayerStateMachine _playerStateMachine, string _animatorParam)
     {
@@ -26,7 +26,7 @@ public class PlayerState
     {
         player.animator.SetBool(animatorParam, true);
         playerRb = player.rb;
-        animationEventTriggered = false;
+        animationFinished = false;
     }
 
     public virtual void Update()
@@ -42,8 +42,8 @@ public class PlayerState
         player.animator.SetBool(animatorParam, false);
     }
 
-    public virtual void OnAnimationEvent()
+    public virtual void OnExitAnimation()
     {
-        animationEventTriggered = true;
+        animationFinished = true;
     }
 }

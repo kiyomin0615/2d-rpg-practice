@@ -89,8 +89,8 @@ public class Player : Entity
         }
     }
 
-    public void OnAnimationEvent()
+    public void OnExitAnimation()
     {
-        stateMachine.currentState.OnAnimationEvent();
+        stateMachine.currentState.OnExitAnimation();
     }
 }

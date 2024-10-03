@@ -13,7 +13,7 @@ public class EnemyState
     protected float yInput;
     private string animatorParam;
 
-    protected bool animationEventTriggered;
+    protected bool animationFinished;
 
     public EnemyState(Enemy _enemy, EnemyStateMachine _enemyStateMachine, string _animatorParam)
     {
@@ -26,7 +26,7 @@ public class EnemyState
     {
         enemy.animator.SetBool(animatorParam, true);
         enemyRb = enemy.rb;
-        animationEventTriggered = false;
+        animationFinished = false;
     }
 
     public virtual void Update()
@@ -39,8 +39,8 @@ public class EnemyState
         enemy.animator.SetBool(animatorParam, false);
     }
 
-    public virtual void OnAnimationEvent()
+    public virtual void OnExitAnimation()
     {
-        animationEventTriggered = true;
+        animationFinished = true;
     }
 }
