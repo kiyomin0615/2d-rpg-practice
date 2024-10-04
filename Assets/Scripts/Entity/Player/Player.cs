@@ -11,8 +11,6 @@ public class Player : Entity
     public float jumpForce = 16f;
 
     [Header("Dash")]
-    [SerializeField] private float dashCoolDown = 2f;
-    [SerializeField] private float dashTimer = 0f;
     public float dashSpeed = 25f;
     public float dashDuration = 0.2f;
     public float dashDir { get; private set; }
@@ -78,12 +76,10 @@ public class Player : Entity
         if (IsWallDetected())
             return;
 
-        dashTimer -= Time.deltaTime;
         // State Machine 패턴에 위배된다
         // 어떤 상태에서든 대쉬 상태로 전이가 가능하다
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashTimer < 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dashSkill.TrySkill())
         {   
-            dashTimer = dashCoolDown;
             dashDir = Input.GetAxisRaw("Horizontal");
             if (dashDir == 0)
                 dashDir = facingDir;
