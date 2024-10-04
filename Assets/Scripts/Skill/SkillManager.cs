@@ -16,10 +16,12 @@ public class SkillManager : MonoBehaviour
         } else {
             Destroy(gameObject);
         }
+
+        dashSkill = GetComponent<DashSkill>();
+        cloneSkill = GetComponent<CloneSkill>();
     }
 
     void Start() {
-        dashSkill = GetComponent<DashSkill>();
-        cloneSkill = GetComponent<CloneSkill>();
+
     }
 }

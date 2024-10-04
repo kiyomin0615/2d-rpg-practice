@@ -5,7 +5,7 @@ using UnityEngine;
 public class CloneSkill : Skill
 {
     [SerializeField] GameObject clonePrefab;
-    [SerializeField] float cloneDuration = 1.5f;
+    public float cloneDuration = 1.5f;
 
     public void createClone(Vector2 position) {
         GameObject clone = Instantiate(clonePrefab);
