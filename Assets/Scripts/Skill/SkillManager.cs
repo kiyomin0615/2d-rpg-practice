@@ -8,6 +8,7 @@ public class SkillManager : MonoBehaviour
 
     public DashSkill dashSkill { get; private set; }
     public CloneSkill cloneSkill { get; private set; }
+    public SwordSkill swordSkill { get; private set; }
 
     void Awake() {
         if (instance == null) {
@@ -19,6 +20,7 @@ public class SkillManager : MonoBehaviour
 
         dashSkill = GetComponent<DashSkill>();
         cloneSkill = GetComponent<CloneSkill>();
+        swordSkill = GetComponent<SwordSkill>();
     }
 
     void Start() {

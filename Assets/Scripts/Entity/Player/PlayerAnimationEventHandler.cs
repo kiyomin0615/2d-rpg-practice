@@ -38,4 +38,8 @@ public class PlayerAnimationEventHandler : MonoBehaviour
             }
         }
     }
+
+    private void OnThrow() {
+        SkillManager.instance.swordSkill.CreateSword();
+    }
 }

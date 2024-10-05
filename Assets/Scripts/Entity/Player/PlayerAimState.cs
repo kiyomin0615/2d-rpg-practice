@@ -11,6 +11,8 @@ public class PlayerAimState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        SkillManager.instance.swordSkill.ToggleAimDots(true);
     }
 
     public override void Update()
