@@ -29,6 +29,8 @@ public class Player : Entity
     public PlayerDashState dashState { get; private set; }
     public PlayerAttackState attackState { get; private set; }
     public PlayerCounterAttackState counterAttackState { get; private set; }
+    public PlayerAimState aimState { get; private set; }
+    public PlayerCatchState catchState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -46,6 +48,8 @@ public class Player : Entity
         dashState = new PlayerDashState(this, stateMachine, "Dash");
         attackState = new PlayerAttackState(this, stateMachine, "Attack");
         counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
+        aimState = new PlayerAimState(this, stateMachine, "Aim");
+        catchState = new PlayerCatchState(this, stateMachine, "Catch");
     }
 
     protected override void Start()
