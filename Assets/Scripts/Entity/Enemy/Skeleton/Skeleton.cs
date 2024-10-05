@@ -39,8 +39,10 @@ public class Skeleton : Enemy
 
     public override void TakeDamage() {
         base.TakeDamage();
+    }
 
-        if (canBeStunned) {
+    public override void Stun() {
+        if (stunnable) {
             animator.SetBool("Stun", true);
             stateMachine.ChangeState(stunState);
         }

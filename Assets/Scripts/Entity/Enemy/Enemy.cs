@@ -17,7 +17,7 @@ public class Enemy : Entity
     public float attackRange = 2.25f;
     public float attackCooldown = 1f;
     public float stunDuration = 1f;
-    public bool canBeStunned = false;
+    public bool stunnable = false;
 
     #region State
     public EnemyStateMachine stateMachine { get; private set; }
@@ -60,10 +60,12 @@ public class Enemy : Entity
     }
 
     public virtual void EnableCounterAttack() {
-        canBeStunned = true;
+        stunnable = true;
     }
 
     public virtual void DisableCounterAttack() {
-        canBeStunned = false;
+        stunnable = false;
     }
+
+    public virtual void Stun() {}
 }

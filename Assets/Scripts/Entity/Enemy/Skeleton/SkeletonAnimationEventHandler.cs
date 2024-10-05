@@ -11,11 +11,11 @@ public class SkeletonAnimationEventHandler : MonoBehaviour
         enemyComponent = GetComponentInParent<Enemy>();
     }
 
-    private void OnEnterCounterAttack() {
+    private void OnEnterStunnable() {
         enemyComponent.EnableCounterAttack();
     }
 
-    private void OnExitCounterAttack() {
+    private void OnExitStunnable() {
         enemyComponent.DisableCounterAttack();
     }
 

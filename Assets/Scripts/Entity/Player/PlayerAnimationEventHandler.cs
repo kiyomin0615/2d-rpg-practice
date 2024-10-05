@@ -26,4 +26,16 @@ public class PlayerAnimationEventHandler : MonoBehaviour
             }
         }
     }
+
+    private void OnHitCounter() {
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(playerComponent.attackChecker.position, playerComponent.attackCheckerRadius);
+
+        foreach(Collider2D hitCollider in hitColliders) {
+            Enemy enemyComponent = hitCollider.GetComponent<Enemy>();
+            if (enemyComponent != null) {
+                enemyComponent.TakeDamage();
+                enemyComponent.Stun();
+            }
+        }
+    }
 }
