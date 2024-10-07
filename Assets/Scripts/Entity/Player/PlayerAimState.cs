@@ -22,10 +22,18 @@ public class PlayerAimState : PlayerState
         // Aim -> Throw(which has exit time) -> Idle
         if (Input.GetKeyUp(KeyCode.Mouse2))
             playerStateMachine.ChangeState(player.idleState);
-    }   
+
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if ((player.transform.position.x > mousePosition.x && player.facingRight) || (player.transform.position.x < mousePosition.x && !player.facingRight))
+        {
+            player.Flip();
+        }
+    }
 
     public override void Exit()
     {
         base.Exit();
+
+        player.StartCoroutine("WaitForDoingSomething", 0.15f);
     }
 }

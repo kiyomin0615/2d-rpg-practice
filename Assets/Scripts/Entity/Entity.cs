@@ -20,7 +20,7 @@ public class Entity : MonoBehaviour
     public float attackCheckerRadius;
 
     public int facingDir { get; private set; } = 1;
-    protected bool facingRight = true;
+    public bool facingRight = true;
 
     protected virtual void Awake()
     {

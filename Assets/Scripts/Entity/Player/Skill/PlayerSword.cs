@@ -49,7 +49,7 @@ public class PlayerSword : MonoBehaviour
         if (isReturning) {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, returnSpeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, player.transform.position) < 0.2f) {
-                player.ClearSword();
+                player.CatchSword();
             }
         }
     }

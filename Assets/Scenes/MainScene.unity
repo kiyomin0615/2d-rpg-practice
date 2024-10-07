@@ -442,6 +442,7 @@ MonoBehaviour:
     m_Bits: 8
   attackChecker: {fileID: 887076092}
   attackCheckerRadius: 1.1
+  facingRight: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -810,8 +811,10 @@ MonoBehaviour:
     m_Bits: 8
   attackChecker: {fileID: 72494618}
   attackCheckerRadius: 1
+  facingRight: 1
   moveSpeed: 8
   jumpForce: 15
+  knockbackSpeed: 3
   dashSpeed: 25
   dashDuration: 0.2
   attackVelocityList:
@@ -1518,6 +1521,7 @@ MonoBehaviour:
     m_Bits: 8
   attackChecker: {fileID: 1018271283}
   attackCheckerRadius: 1.1
+  facingRight: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
