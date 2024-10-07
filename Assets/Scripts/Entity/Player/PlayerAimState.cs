@@ -19,6 +19,8 @@ public class PlayerAimState : PlayerState
     {
         base.Update();
 
+        player.SetVelocity(0f, 0f);
+
         // Aim -> Throw(which has exit time) -> Idle
         if (Input.GetKeyUp(KeyCode.Mouse2))
             playerStateMachine.ChangeState(player.idleState);

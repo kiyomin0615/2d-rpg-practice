@@ -16,6 +16,9 @@ public class PlayerSword : MonoBehaviour
     [SerializeField] float returnSpeed = 12;
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if (isReturning)
+            return;
+
         isStuck = true;
 
         circleCollider.enabled = false;
@@ -63,6 +66,7 @@ public class PlayerSword : MonoBehaviour
 
     public void GoBackToPlayer() {
         rb.isKinematic = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
         transform.parent = null;
 
