@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : Entity
 {
+    public GameObject thrownSword { get; private set;}
+
     public bool isDoingSomething { get; private set; }
 
     [Header("Move")]
@@ -65,6 +68,23 @@ public class Player : Entity
 
         stateMachine.currentState.Update();
         CheckDashInput();
+    }
+
+    public void AssignNewSword(GameObject sword) {
+        thrownSword = sword;
+    }
+
+    public void ClearSword() {
+        Destroy(thrownSword);
+    }
+
+    public bool HasSword() {
+        if (!thrownSword) {
+            return true;
+        }
+
+        thrownSword.GetComponent<PlayerSword>().GoBackToPlayer();
+        return false;
     }
 
     // Coroutine

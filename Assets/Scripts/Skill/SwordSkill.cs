@@ -43,7 +43,10 @@ public class SwordSkill : Skill
         PlayerSword playerSword = sword.GetComponent<PlayerSword>();
 
         sword.transform.position = PlayerManager.instance.player.transform.position;
-        playerSword.SetupSword(swordVelocity, swordGravity);
+        playerSword.LaunchSword(swordVelocity, swordGravity);
+
+        PlayerManager.instance.player.AssignNewSword(sword);
+
         ToggleAimDots(false);
     }
 
