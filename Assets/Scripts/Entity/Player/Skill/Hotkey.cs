@@ -23,7 +23,7 @@ public class Hotkey : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(hotkey)) {
-            this.blackhole.AddEnemyToList(enemyTransform);
+            blackhole.AddEnemyToList(enemyTransform);
             textComponent.color = Color.clear;
             spriteRenderer.color = Color.clear;
         }

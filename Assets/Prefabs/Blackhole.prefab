@@ -133,9 +133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161ccffc3383250449f9de2a1a86c274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkeyPrefab: {fileID: 0}
-  keyList: 71000000770000006500000072000000
+  hotkeyPrefab: {fileID: 6274406716725498882, guid: ee2c532f0d26d1547b3676a742f0f888, type: 3}
+  keyList: 7100000077000000650000007a0000007800000063000000
+  hotkeyList: []
   maxSize: 15
   growingSpeed: 0.8
+  shrinkingSpeed: 3
   canGrow: 0
+  canShrink: 0
+  maxAttackCount: 5
   enemyTransforms: []
