@@ -68,4 +68,14 @@ public class Enemy : Entity
     }
 
     public virtual void Stun() {}
+
+    public virtual void Freeze() {
+        moveSpeed = 0f;
+        animator.SetBool("Move", false);
+    }
+
+    public virtual void Unfreeze() {
+        moveSpeed = 3f;
+        animator.SetBool("Move", true);
+    }
 }
