@@ -35,6 +35,7 @@ public class Player : Entity
     public PlayerCounterAttackState counterAttackState { get; private set; }
     public PlayerAimState aimState { get; private set; }
     public PlayerCatchState catchState { get; private set; }
+    public PlayerUltimateState ultimateState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -54,6 +55,7 @@ public class Player : Entity
         counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
         aimState = new PlayerAimState(this, stateMachine, "Aim");
         catchState = new PlayerCatchState(this, stateMachine, "Catch");
+        ultimateState = new PlayerUltimateState(this, stateMachine, "Jump");
     }
 
     protected override void Start()
@@ -116,5 +118,9 @@ public class Player : Entity
     public void OnExitAnimation()
     {
         stateMachine.currentState.OnExitAnimation();
+    }
+
+    public void ExitUltimateState() {
+        stateMachine.ChangeState(airState);
     }
 }

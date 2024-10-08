@@ -31,6 +31,9 @@ public class PlayerGroundedState : PlayerState
 
         if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
             playerStateMachine.ChangeState(player.jumpState);
+
+        if (Input.GetKeyDown(KeyCode.R))
+            playerStateMachine.ChangeState(player.ultimateState);
     }
 
     public override void Exit()

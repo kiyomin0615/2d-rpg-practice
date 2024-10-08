@@ -8,9 +8,9 @@ public class Blackhole : MonoBehaviour
     [SerializeField] List<KeyCode> keyList;
     [SerializeField] List<GameObject> hotkeyList;
 
-    public float maxSize;
-    public float growingSpeed;
-    public float shrinkingSpeed;
+    float maxSize;
+    float growingSpeed;
+    float shrinkingSpeed;
     public bool canGrow;
     public bool canShrink;
 
@@ -18,13 +18,36 @@ public class Blackhole : MonoBehaviour
     float timer;
     float cooldown = 0.3f;
 
-    public List<Transform> enemyTransforms = new List<Transform>();
+    List<Transform> enemyTransforms = new List<Transform>();
+
+    public void Setup(float maxSize, float growingSpeed, float shrinkingSpeed) {
+        this.maxSize = maxSize;
+        this.growingSpeed = growingSpeed;
+        this.shrinkingSpeed = shrinkingSpeed;
+
+        canGrow = true;
+    }
 
     void Update()
     {
         timer -= Time.deltaTime;
-        if (timer < 0 && Input.GetKeyDown(KeyCode.R) && maxAttackCount > 0) {
+
+        Grow();
+        AttackWithinBlackhole();
+        Shrink();    
+    }
+
+    void AttackWithinBlackhole() {
+        if (maxAttackCount <= 0) {
+            canGrow = false;
+            canShrink = true;
+            return;
+        }
+
+        if (timer < 0 && Input.GetKeyDown(KeyCode.R)) {
             timer = cooldown;
+
+            PlayerManager.instance.player.Disappear();
 
             int randomIndex = Random.Range(0, enemyTransforms.Count);
             float xOffset = Random.Range(0, 2) == 0 ? 1.5f : -1.5f;
@@ -32,16 +55,21 @@ public class Blackhole : MonoBehaviour
 
             maxAttackCount--;
         }
-
+    }
+    
+    void Grow() {
         if (canGrow && !canShrink) {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(maxSize, maxSize), growingSpeed * Time.deltaTime);
         }
+    }
 
+    void Shrink() {
         if (canShrink && !canGrow) {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0, 0), shrinkingSpeed * Time.deltaTime);
             if (transform.localScale.magnitude <= 0.1f) {
-                Destroy(gameObject);
+                PlayerManager.instance.player.ExitUltimateState();
                 DestroyAllHotkey();
+                Destroy(gameObject);
             }
         }
     }

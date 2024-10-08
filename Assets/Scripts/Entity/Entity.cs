@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
     public Animator animator { get; private set; }
     public Rigidbody2D rb { get; private set; }
     public EntityEffects effects { get; private set; }
+    public SpriteRenderer spriteRenderer { get; private set; }
     #endregion
 
     [Header("Collision")]
@@ -24,14 +25,15 @@ public class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
-
+        animator = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        effects = GetComponent<EntityEffects>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected virtual void Start()
     {
-        animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        effects = GetComponent<EntityEffects>();
+
     }
 
     protected virtual void Update()
@@ -77,5 +79,13 @@ public class Entity : MonoBehaviour
     public virtual void TakeDamage() {
         Debug.Log($"{gameObject.name} got damaged.");
         effects.StartCoroutine("ApplyHitEffect");
+    }
+
+    public void Appear() {
+        spriteRenderer.color = Color.white;
+    }
+
+    public void Disappear() {
+        spriteRenderer.color = Color.clear;
     }
 }
