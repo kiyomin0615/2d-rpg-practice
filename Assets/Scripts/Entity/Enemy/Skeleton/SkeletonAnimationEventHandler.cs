@@ -29,8 +29,9 @@ public class SkeletonAnimationEventHandler : MonoBehaviour
 
         foreach(Collider2D hitCollider in hitColliders) {
             Player playerComponent = hitCollider.GetComponent<Player>();
+            PlayerStats playerStats = hitCollider.GetComponent<PlayerStats>();
             if (playerComponent != null) {
-                playerComponent.TakeDamage();
+                playerComponent.TakeDamage(enemyComponent);
             }
         }
     }

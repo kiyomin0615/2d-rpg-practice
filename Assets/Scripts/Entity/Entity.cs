@@ -78,7 +78,8 @@ public class Entity : MonoBehaviour
         ControlFlip(_xVelocity);
     }
 
-    public virtual void TakeDamage() {
+    public virtual void TakeDamage(Entity subject) {
+        stats.ReduceHp(subject);
         Debug.Log($"{gameObject.name} got damaged.");
         effects.StartCoroutine("ApplyHitEffect");
     }

@@ -7,27 +7,26 @@ public class Stats : MonoBehaviour
 {
     public Stat maxHp;
     public Stat damage;
+    public Stat strength;
 
     [SerializeField] public int currentHp;
 
     void Start()
     {
         currentHp = maxHp.GetValue();
-
-        // TMP
-        damage.AddModifier(5);
     }
 
-    public void ReduceHp(int damage) {
-        currentHp -= damage;
-        Debug.Log($"Damage: {damage}");
+    public virtual void ReduceHp(Entity subject) {
+        int totalDamage = subject.stats.damage.GetValue() + subject.stats.strength.GetValue();
+        currentHp -= totalDamage;
+        Debug.Log($"Damage: {totalDamage}");
 
         if (currentHp < 0) {
             Die();
         }
     }
 
-    void Die() {
+    protected virtual void Die() {
         //
     }
 }

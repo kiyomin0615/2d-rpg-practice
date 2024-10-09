@@ -76,7 +76,7 @@ public class PlayerClone : MonoBehaviour
         foreach(Collider2D hitCollider in hitColliders) {
             Enemy enemyComponent = hitCollider.GetComponent<Enemy>();
             if (enemyComponent != null) {
-                enemyComponent.TakeDamage();
+                enemyComponent.TakeDamage(PlayerManager.instance.player);
             }
         }
     }

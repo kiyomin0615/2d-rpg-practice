@@ -411,7 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 130827533}
   - component: {fileID: 130827534}
-  - component: {fileID: 130827538}
+  - component: {fileID: 130827539}
   - component: {fileID: 130827537}
   - component: {fileID: 130827536}
   - component: {fileID: 130827535}
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 2100000, guid: 7b2b2757fb230ad49b37944eeb91ceb0, type: 2}
---- !u!114 &130827538
+--- !u!114 &130827539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -568,13 +568,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 130827532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d0e9b88ad480dc46af84465a1168082, type: 3}
+  m_Script: {fileID: 11500000, guid: 4070390a2e593f6479ee1caac5b17d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp:
     baseValue: 50
   damage:
     baseValue: 5
+  strength:
+    baseValue: 3
   currentHp: 50
 --- !u!1 &145215652
 GameObject:
@@ -881,13 +883,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 195868997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d0e9b88ad480dc46af84465a1168082, type: 3}
+  m_Script: {fileID: 11500000, guid: d058cc77b1798804884d6050a056f01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp:
     baseValue: 100
   damage:
     baseValue: 10
+  strength:
+    baseValue: 5
   currentHp: 100
 --- !u!1 &373006977
 GameObject:
@@ -1460,7 +1464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 844873392}
   - component: {fileID: 844873391}
-  - component: {fileID: 844873393}
+  - component: {fileID: 844873394}
   - component: {fileID: 844873390}
   - component: {fileID: 844873389}
   - component: {fileID: 844873388}
@@ -1608,7 +1612,7 @@ Transform:
   - {fileID: 1018271283}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &844873393
+--- !u!114 &844873394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1617,13 +1621,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 844873387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d0e9b88ad480dc46af84465a1168082, type: 3}
+  m_Script: {fileID: 11500000, guid: 4070390a2e593f6479ee1caac5b17d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 30
+    baseValue: 50
   damage:
     baseValue: 5
+  strength:
+    baseValue: 3
   currentHp: 50
 --- !u!1 &887076091
 GameObject:
