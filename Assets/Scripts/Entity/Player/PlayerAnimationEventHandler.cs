@@ -21,8 +21,10 @@ public class PlayerAnimationEventHandler : MonoBehaviour
 
         foreach(Collider2D hitCollider in hitColliders) {
             Enemy enemyComponent = hitCollider.GetComponent<Enemy>();
+            Stats enemyStats =hitCollider.GetComponent<Stats>();
             if (enemyComponent != null) {
                 enemyComponent.TakeDamage();
+                enemyStats.ReduceHp(playerComponent.stats.damage.GetValue());
             }
         }
     }
@@ -32,8 +34,10 @@ public class PlayerAnimationEventHandler : MonoBehaviour
 
         foreach(Collider2D hitCollider in hitColliders) {
             Enemy enemyComponent = hitCollider.GetComponent<Enemy>();
+            Stats enemyStats =hitCollider.GetComponent<Stats>();
             if (enemyComponent != null) {
                 enemyComponent.TakeDamage();
+                enemyStats.ReduceHp(playerComponent.stats.damage.GetValue());
                 enemyComponent.Stun();
             }
         }

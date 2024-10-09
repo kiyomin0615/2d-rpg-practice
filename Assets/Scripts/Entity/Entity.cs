@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     public EntityEffects effects { get; private set; }
     public SpriteRenderer spriteRenderer { get; private set; }
+    public Stats stats { get; private set; }
     #endregion
 
     [Header("Collision")]
@@ -29,6 +30,7 @@ public class Entity : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         effects = GetComponent<EntityEffects>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        stats = GetComponent<Stats>();
     }
 
     protected virtual void Start()
