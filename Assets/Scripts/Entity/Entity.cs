@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     public EntityEffects effects { get; private set; }
     public SpriteRenderer spriteRenderer { get; private set; }
+    public CapsuleCollider2D capsuleCollider { get; private set; }
     public Stats stats { get; private set; }
     #endregion
 
@@ -30,6 +31,7 @@ public class Entity : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         effects = GetComponent<EntityEffects>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
         stats = GetComponent<Stats>();
     }
 
@@ -90,5 +92,8 @@ public class Entity : MonoBehaviour
 
     public void Disappear() {
         spriteRenderer.color = Color.clear;
+    }
+
+    public virtual void Die() {
     }
 }

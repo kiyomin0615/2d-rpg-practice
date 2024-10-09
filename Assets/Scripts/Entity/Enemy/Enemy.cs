@@ -19,9 +19,9 @@ public class Enemy : Entity
     public float stunDuration = 1f;
     public bool stunnable = false;
 
-    #region State
     public EnemyStateMachine stateMachine { get; private set; }
-    #endregion
+
+    public string lastAnimatorParam { get; private set; }
 
     protected override void Awake()
     {
@@ -77,5 +77,9 @@ public class Enemy : Entity
     public virtual void Unfreeze() {
         moveSpeed = 3f;
         animator.SetBool("Move", true);
+    }
+
+    public void SetLastAnimatorParam(string param) {
+       lastAnimatorParam = param;
     }
 }

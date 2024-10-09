@@ -11,7 +11,7 @@ public class Stats : MonoBehaviour
 
     [SerializeField] public int currentHp;
 
-    void Start()
+    protected virtual void Start()
     {
         currentHp = maxHp.GetValue();
     }

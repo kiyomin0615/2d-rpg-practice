@@ -37,6 +37,7 @@ public class EnemyState
     public virtual void Exit()
     {
         enemy.animator.SetBool(animatorParam, false);
+        enemy.SetLastAnimatorParam(animatorParam);
     }
 
     public virtual void OnExitAnimation()
