@@ -495,12 +495,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4070390a2e593f6479ee1caac5b17d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp:
-    baseValue: 50
-  damage:
-    baseValue: 5
   strength:
     baseValue: 3
+  agility:
+    baseValue: 3
+  vitality:
+    baseValue: 3
+  damage:
+    baseValue: 5
+  criticalChange:
+    baseValue: 100
+  criticalDamagePercentage:
+    baseValue: 150
+  maxHp:
+    baseValue: 50
+  armor:
+    baseValue: 0
+  evasion:
+    baseValue: 0
   currentHp: 50
 --- !u!70 &130827540
 CapsuleCollider2D:
@@ -814,12 +826,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d058cc77b1798804884d6050a056f01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp:
-    baseValue: 100
-  damage:
-    baseValue: 10
   strength:
     baseValue: 5
+  agility:
+    baseValue: 5
+  vitality:
+    baseValue: 5
+  damage:
+    baseValue: 10
+  criticalChange:
+    baseValue: 0
+  criticalDamagePercentage:
+    baseValue: 0
+  maxHp:
+    baseValue: 100
+  armor:
+    baseValue: 10
+  evasion:
+    baseValue: 0
   currentHp: 100
 --- !u!1 &373006977
 GameObject:
