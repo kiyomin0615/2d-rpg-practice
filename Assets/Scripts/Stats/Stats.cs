@@ -22,6 +22,8 @@ public class Stats : MonoBehaviour
 
     public Action onHPChanged = null;
 
+    protected bool isDead = false;
+
     protected virtual void Start()
     {
         currentHP = CalculateMaxHP();
@@ -47,7 +49,7 @@ public class Stats : MonoBehaviour
 
         Debug.Log($"Damage: {totalDamage}");
 
-        if (currentHP < 0)
+        if (currentHP < 0 && !isDead)
         {
             Die();
         }
@@ -60,7 +62,7 @@ public class Stats : MonoBehaviour
 
     protected virtual void Die()
     {
-        //
+        isDead = true;
     }
 
     int CalculateTotalDamage(int damage)

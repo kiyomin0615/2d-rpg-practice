@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Entity
-{    
+{
     [SerializeField] protected LayerMask playerLayer;
 
     [Header("Move")]
@@ -45,41 +45,47 @@ public class Enemy : Entity
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        
+
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (attackRange * facingDir), transform.position.y));
     }
 
-    public virtual RaycastHit2D isPlayerDetected() {
+    public virtual RaycastHit2D isPlayerDetected()
+    {
         return Physics2D.Raycast(wallChecker.position, Vector2.right * facingDir, battleRange, playerLayer);
     }
-    
+
     public void OnExitAnimation()
     {
         stateMachine.currentState.OnExitAnimation();
     }
 
-    public virtual void EnableCounterAttack() {
+    public virtual void EnableCounterAttack()
+    {
         stunnable = true;
     }
 
-    public virtual void DisableCounterAttack() {
+    public virtual void DisableCounterAttack()
+    {
         stunnable = false;
     }
 
-    public virtual void Stun() {}
+    public virtual void Stun() { }
 
-    public virtual void Freeze() {
+    public virtual void Freeze()
+    {
         moveSpeed = 0f;
         animator.SetBool("Move", false);
     }
 
-    public virtual void Unfreeze() {
+    public virtual void Unfreeze()
+    {
         moveSpeed = 3f;
         animator.SetBool("Move", true);
     }
 
-    public void SetLastAnimatorParam(string param) {
-       lastAnimatorParam = param;
+    public void SetLastAnimatorParam(string param)
+    {
+        lastAnimatorParam = param;
     }
 }

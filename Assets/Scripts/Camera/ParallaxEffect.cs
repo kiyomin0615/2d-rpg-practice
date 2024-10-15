@@ -20,12 +20,15 @@ public class ParallaxEffect : MonoBehaviour
 
     void Update()
     {
-        float distToMove = mainCamera.transform.position.x  * parallaxEffect;
+        float distToMove = mainCamera.transform.position.x * parallaxEffect;
         float diff = mainCamera.transform.position.x - distToMove;
 
-        if (diff > xPosition + length) {
+        if (diff > xPosition + length)
+        {
             xPosition += length;
-        } else if (diff < xPosition - length) {
+        }
+        else if (diff < xPosition - length)
+        {
             xPosition -= length;
         }
 

@@ -8,12 +8,14 @@ public class EntityEffects : MonoBehaviour
     private Material original;
     [SerializeField] private Material hitEffect;
 
-    void Start() {
+    void Start()
+    {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         original = spriteRenderer.material;
     }
 
-    IEnumerator ApplyHitEffect() {
+    IEnumerator ApplyHitEffect()
+    {
         spriteRenderer.material = hitEffect;
 
         yield return new WaitForSeconds(0.1f);
@@ -21,11 +23,13 @@ public class EntityEffects : MonoBehaviour
         spriteRenderer.material = original;
     }
 
-    public void EnterStunEffect() {
+    public void EnterStunEffect()
+    {
         spriteRenderer.color = Color.red;
     }
 
-    public void ExitStunEffect() {
+    public void ExitStunEffect()
+    {
         spriteRenderer.color = Color.white;
     }
 }

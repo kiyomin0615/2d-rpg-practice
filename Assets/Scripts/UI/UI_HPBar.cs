@@ -29,7 +29,8 @@ public class UI_HPBar : MonoBehaviour
         rectTransform.Rotate(0, 180, 0);
     }
 
-    void OnDisable() {
+    void OnDisable()
+    {
         entityComponent.onFlip -= FlipUI;
     }
 

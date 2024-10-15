@@ -92,7 +92,6 @@ public class Entity : MonoBehaviour
     public virtual void TakeDamage(Entity subject)
     {
         stats.ReduceHP(subject);
-        Debug.Log($"{gameObject.name} got damaged.");
         effects.StartCoroutine("ApplyHitEffect");
     }
 

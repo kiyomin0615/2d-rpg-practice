@@ -24,7 +24,8 @@ public class SkeletonAttackState : EnemyState
 
         skeleton.SetVelocity(0f, 0f);
 
-        if (animationFinished) {
+        if (animationFinished)
+        {
             enemyStateMachine.ChangeState(skeleton.battleState);
         }
     }

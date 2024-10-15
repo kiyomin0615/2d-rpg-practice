@@ -6,14 +6,14 @@ using UnityEngine;
 public class PlayerJumpState : PlayerState
 {
     public PlayerJumpState(Player _player, PlayerStateMachine _playerStateMachine, string _animatorParam) : base(_player, _playerStateMachine, _animatorParam)
-    {   
+    {
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        player.SetVelocity(playerRb. velocity.x, player.jumpForce);
+        player.SetVelocity(playerRb.velocity.x, player.jumpForce);
     }
 
     public override void Update()
@@ -30,6 +30,4 @@ public class PlayerJumpState : PlayerState
     {
         base.Exit();
     }
-
-    
 }

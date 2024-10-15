@@ -28,10 +28,11 @@ public class PlayerCatchState : PlayerState
     {
         base.Update();
 
-        if (animationFinished) {
+        if (animationFinished)
+        {
             playerStateMachine.ChangeState(player.idleState);
         }
-    }   
+    }
 
     public override void Exit()
     {

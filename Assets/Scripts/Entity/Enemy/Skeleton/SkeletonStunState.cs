@@ -25,7 +25,8 @@ public class SkeletonStunState : EnemyState
     {
         base.Update();
 
-        if (stateTimer < 0) {
+        if (stateTimer < 0)
+        {
             enemyStateMachine.ChangeState(skeleton.idleState);
         }
     }

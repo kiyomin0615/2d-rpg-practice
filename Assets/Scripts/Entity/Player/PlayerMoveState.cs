@@ -6,8 +6,6 @@ public class PlayerMoveState : PlayerGroundedState
 {
     public PlayerMoveState(Player _player, PlayerStateMachine _playerStateMachine, string _animBoolName) : base(_player, _playerStateMachine, _animBoolName)
     {
-        
-
     }
 
     public override void Enter()

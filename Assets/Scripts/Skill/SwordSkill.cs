@@ -26,9 +26,11 @@ public class SwordSkill : Skill
     {
         base.Update();
 
-        if (Input.GetKey(KeyCode.Mouse2)) {
+        if (Input.GetKey(KeyCode.Mouse2))
+        {
             swordVelocity = CalculateFireDirection() * fireForce;
-             for (int i = 0; i < aimDots.Length; i++) {
+            for (int i = 0; i < aimDots.Length; i++)
+            {
                 aimDots[i].transform.position = CalculateAimDotPosition(i * spaceBetween);
             }
         }
@@ -50,33 +52,38 @@ public class SwordSkill : Skill
         ToggleAimDots(false);
     }
 
-    public Vector2 CalculateFireDirection()
+    public void ToggleAimDots(bool isActive)
     {
-        Vector2 playerPosition = PlayerManager.instance.player.transform.position;
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        return (mousePosition - playerPosition).normalized;
+        for (int i = 0; i < aimDots.Length; i++)
+        {
+            aimDots[i].SetActive(isActive);
+        }
     }
 
-    void GenerateAimDots() {
+    void GenerateAimDots()
+    {
         aimDots = new GameObject[count];
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++)
+        {
             aimDots[i] = Instantiate(aimDotPrefab, PlayerManager.instance.player.transform.position, Quaternion.identity, aimDotParentTransform);
             aimDots[i].SetActive(false);
         }
     }
 
-    public void ToggleAimDots(bool isActive) {
-        for (int i = 0; i < aimDots.Length; i++) {
-            aimDots[i].SetActive(isActive);
-        }
-    }
-
-    Vector2 CalculateAimDotPosition(float t) {
-        Vector2 position = (Vector2) PlayerManager.instance.player.transform.position + new Vector2(
+    Vector2 CalculateAimDotPosition(float t)
+    {
+        Vector2 position = (Vector2)PlayerManager.instance.player.transform.position + new Vector2(
             swordVelocity.x * t,
             swordVelocity.y * t - (0.5f * 9.8f * swordGravity * t * t)
         );
 
         return position;
+    }
+
+    Vector2 CalculateFireDirection()
+    {
+        Vector2 playerPosition = PlayerManager.instance.player.transform.position;
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return (mousePosition - playerPosition).normalized;
     }
 }

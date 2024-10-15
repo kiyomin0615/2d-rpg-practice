@@ -20,7 +20,8 @@ public class SkeletonGroundState : EnemyState
     {
         base.Update();
 
-        if (skeleton.isPlayerDetected()) {
+        if (skeleton.isPlayerDetected())
+        {
             enemyStateMachine.ChangeState(skeleton.battleState);
         }
     }

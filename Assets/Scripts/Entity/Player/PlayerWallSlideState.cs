@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerWallSlideState : PlayerState
 {
     public PlayerWallSlideState(Player _player, PlayerStateMachine _playerStateMachine, string _animatorParam) : base(_player, _playerStateMachine, _animatorParam)
-    {   
+    {
     }
 
     public override void Enter()
@@ -33,6 +33,4 @@ public class PlayerWallSlideState : PlayerState
     {
         base.Exit();
     }
-
-    
 }

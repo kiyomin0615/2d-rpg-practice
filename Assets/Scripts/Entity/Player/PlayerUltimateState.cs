@@ -9,9 +9,8 @@ public class PlayerUltimateState : PlayerState
     float flyTime = 0.4f;
     bool usingSkill = false;
 
-    public PlayerUltimateState(Player _player, PlayerStateMachine _playerStateMachine, string _animatorParam): base(_player, _playerStateMachine, _animatorParam)
+    public PlayerUltimateState(Player _player, PlayerStateMachine _playerStateMachine, string _animatorParam) : base(_player, _playerStateMachine, _animatorParam)
     {
-        
     }
 
     public override void Enter()
@@ -27,14 +26,17 @@ public class PlayerUltimateState : PlayerState
     {
         base.Update();
 
-        if (stateTimer > 0) {
+        if (stateTimer > 0)
+        {
             playerRb.velocity = new Vector2(0, 15);
         }
 
-        if (stateTimer <= 0) {
+        if (stateTimer <= 0)
+        {
             playerRb.velocity = new Vector2(0, -0.1f);
-            if (!usingSkill) {
-                if(SkillManager.instance.ultimateSkill.TrySkill())
+            if (!usingSkill)
+            {
+                if (SkillManager.instance.ultimateSkill.TrySkill())
                     usingSkill = true;
             }
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    public GameObject thrownSword { get; private set;}
+    public GameObject thrownSword { get; private set; }
 
     public bool isDoingSomething { get; private set; }
 
@@ -75,17 +75,21 @@ public class Player : Entity
         CheckDashInput();
     }
 
-    public void AssignNewSword(GameObject sword) {
+    public void AssignNewSword(GameObject sword)
+    {
         thrownSword = sword;
     }
 
-    public void CatchSword() {
+    public void CatchSword()
+    {
         stateMachine.ChangeState(catchState);
         Destroy(thrownSword);
     }
 
-    public bool HasSword() {
-        if (!thrownSword) {
+    public bool HasSword()
+    {
+        if (!thrownSword)
+        {
             return true;
         }
 
@@ -101,23 +105,8 @@ public class Player : Entity
         isDoingSomething = false;
     }
 
-    private void CheckDashInput()
+    public override void Die()
     {
-        if (IsWallDetected())
-            return;
-
-        // State Machine 패턴에 위배된다
-        // 어떤 상태에서든 대쉬 상태로 전이가 가능하다
-        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dashSkill.TrySkill())
-        {   
-            dashDir = Input.GetAxisRaw("Horizontal");
-            if (dashDir == 0)
-                dashDir = facingDir;
-            stateMachine.ChangeState(dashState);
-        }
-    }
-
-    public override void Die() {
         base.Die();
 
         stateMachine.ChangeState(dieState);
@@ -128,7 +117,24 @@ public class Player : Entity
         stateMachine.currentState.OnExitAnimation();
     }
 
-    public void ExitUltimateState() {
+    public void ExitUltimateState()
+    {
         stateMachine.ChangeState(airState);
+    }
+
+    private void CheckDashInput()
+    {
+        if (IsWallDetected())
+            return;
+
+        // State Machine 패턴에 위배된다
+        // 어떤 상태에서든 대쉬 상태로 전이가 가능하다
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dashSkill.TrySkill())
+        {
+            dashDir = Input.GetAxisRaw("Horizontal");
+            if (dashDir == 0)
+                dashDir = facingDir;
+            stateMachine.ChangeState(dashState);
+        }
     }
 }

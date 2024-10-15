@@ -16,32 +16,39 @@ public class PlayerAnimationEventHandler : MonoBehaviour
         playerComponent.OnExitAnimation();
     }
 
-    private void OnHit() {
+    private void OnHit()
+    {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(playerComponent.attackChecker.position, playerComponent.attackCheckerRadius);
 
-        foreach(Collider2D hitCollider in hitColliders) {
+        foreach (Collider2D hitCollider in hitColliders)
+        {
             Enemy enemyComponent = hitCollider.GetComponent<Enemy>();
             EnemyStats enemyStats = hitCollider.GetComponent<EnemyStats>();
-            if (enemyComponent != null) {
+            if (enemyComponent != null)
+            {
                 enemyComponent.TakeDamage(playerComponent);
             }
         }
     }
 
-    private void OnHitCounter() {
+    private void OnHitCounter()
+    {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(playerComponent.attackChecker.position, playerComponent.attackCheckerRadius);
 
-        foreach(Collider2D hitCollider in hitColliders) {
+        foreach (Collider2D hitCollider in hitColliders)
+        {
             Enemy enemyComponent = hitCollider.GetComponent<Enemy>();
-            EnemyStats enemyStats =hitCollider.GetComponent<EnemyStats>();
-            if (enemyComponent != null) {
+            EnemyStats enemyStats = hitCollider.GetComponent<EnemyStats>();
+            if (enemyComponent != null)
+            {
                 enemyComponent.TakeDamage(playerComponent);
                 enemyComponent.Stun();
             }
         }
     }
 
-    private void OnThrow() {
+    private void OnThrow()
+    {
         SkillManager.instance.swordSkill.CreateSword();
     }
 }

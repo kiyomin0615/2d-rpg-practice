@@ -8,10 +8,12 @@ public class Stat
     [SerializeField] int baseValue;
     List<int> modifiers = new List<int>();
 
-    public int GetValue() {
+    public int GetValue()
+    {
         int finalValue = baseValue;
 
-        foreach (int modifier in modifiers) {
+        foreach (int modifier in modifiers)
+        {
             finalValue += modifier;
         }
 
@@ -23,11 +25,13 @@ public class Stat
         baseValue = value;
     }
 
-    public void AddModifier(int modifier) {
+    public void AddModifier(int modifier)
+    {
         modifiers.Add(modifier);
     }
 
-    public void RemoveModifier(int index) {
+    public void RemoveModifier(int index)
+    {
         modifiers.RemoveAt(index);
     }
 }

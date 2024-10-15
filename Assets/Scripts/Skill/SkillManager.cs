@@ -11,11 +11,15 @@ public class SkillManager : MonoBehaviour
     public SwordSkill swordSkill { get; private set; }
     public UltimateSkill ultimateSkill { get; private set; }
 
-    void Awake() {
-        if (instance == null) {
+    void Awake()
+    {
+        if (instance == null)
+        {
             instance = this;
             DontDestroyOnLoad(gameObject);
-        } else {
+        }
+        else
+        {
             Destroy(gameObject);
         }
 
@@ -25,7 +29,7 @@ public class SkillManager : MonoBehaviour
         ultimateSkill = GetComponent<UltimateSkill>();
     }
 
-    void Start() {
-
+    void Start()
+    {
     }
 }

@@ -11,7 +11,8 @@ public class Hotkey : MonoBehaviour
     TextMeshProUGUI textComponent;
     SpriteRenderer spriteRenderer;
 
-    public void Setup(KeyCode key, Transform enemyTransform, Blackhole blackhole) {
+    public void Setup(KeyCode key, Transform enemyTransform, Blackhole blackhole)
+    {
         this.hotkey = key;
         this.enemyTransform = enemyTransform;
         this.blackhole = blackhole;
@@ -22,12 +23,11 @@ public class Hotkey : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(hotkey)) {
+        if (Input.GetKeyDown(hotkey))
+        {
             blackhole.AddEnemyToList(enemyTransform);
             textComponent.color = Color.clear;
             spriteRenderer.color = Color.clear;
         }
     }
-
-
 }

@@ -26,7 +26,8 @@ public class SkeletonDieState : EnemyState
     {
         base.Update();
 
-        if (stateTimer > 0) {
+        if (stateTimer > 0)
+        {
             enemyRb.velocity = new Vector2(0, 10);
         }
     }

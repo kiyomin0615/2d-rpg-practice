@@ -19,7 +19,8 @@ public class SkeletonIdleState : SkeletonGroundState
     {
         base.Update();
 
-        if (stateTimer < 0) {
+        if (stateTimer < 0)
+        {
             enemyStateMachine.ChangeState(skeleton.moveState);
         }
     }

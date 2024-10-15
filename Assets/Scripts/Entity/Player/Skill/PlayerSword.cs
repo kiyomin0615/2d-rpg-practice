@@ -15,11 +15,18 @@ public class PlayerSword : MonoBehaviour
 
     [SerializeField] float returnSpeed = 12;
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if (isReturning)
             return;
 
         isStuck = true;
+
+        Enemy enemyComponent = other.gameObject.GetComponent<Enemy>();
+        if (enemyComponent != null)
+        {
+            enemyComponent.TakeDamage(player);
+        }
 
         circleCollider.enabled = false;
 
@@ -41,7 +48,7 @@ public class PlayerSword : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -49,22 +56,26 @@ public class PlayerSword : MonoBehaviour
         if (!isStuck)
             transform.right = rb.velocity;
 
-        if (isReturning) {
+        if (isReturning)
+        {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, returnSpeed * Time.deltaTime);
-            if (Vector2.Distance(transform.position, player.transform.position) < 0.2f) {
+            if (Vector2.Distance(transform.position, player.transform.position) < 0.2f)
+            {
                 player.CatchSword();
             }
         }
     }
 
-    public void LaunchSword(Vector2 velocity, float gravity) {
+    public void LaunchSword(Vector2 velocity, float gravity)
+    {
         rb.velocity = velocity;
         rb.gravityScale = gravity;
-        
+
         animator.SetBool("Fly", true);
     }
 
-    public void GoBackToPlayer() {
+    public void GoBackToPlayer()
+    {
         rb.isKinematic = false;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 

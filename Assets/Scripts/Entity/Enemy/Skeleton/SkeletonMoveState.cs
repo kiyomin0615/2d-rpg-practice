@@ -20,7 +20,8 @@ public class SkeletonMoveState : SkeletonGroundState
 
         skeleton.SetVelocity(skeleton.moveSpeed * skeleton.facingDir, skeleton.rb.velocity.y);
 
-        if (skeleton.IsWallDetected() || !skeleton.IsGroundDetected()) {
+        if (skeleton.IsWallDetected() || !skeleton.IsGroundDetected())
+        {
             skeleton.Flip();
             enemyStateMachine.ChangeState(skeleton.idleState);
         }

@@ -19,8 +19,9 @@ public class PlayerCounterAttackState : PlayerState
 
         player.SetVelocity(0, 0);
 
-        if (animationFinished) {
-          playerStateMachine.ChangeState(player.idleState);
+        if (animationFinished)
+        {
+            playerStateMachine.ChangeState(player.idleState);
         }
     }
 

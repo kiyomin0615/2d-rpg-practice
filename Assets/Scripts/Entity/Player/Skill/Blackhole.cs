@@ -20,7 +20,17 @@ public class Blackhole : MonoBehaviour
 
     List<Transform> enemyTransforms = new List<Transform>();
 
-    public void Setup(float maxSize, float growingSpeed, float shrinkingSpeed) {
+    void Update()
+    {
+        timer -= Time.deltaTime;
+
+        Grow();
+        AttackWithinBlackhole();
+        Shrink();
+    }
+
+    public void Setup(float maxSize, float growingSpeed, float shrinkingSpeed)
+    {
         this.maxSize = maxSize;
         this.growingSpeed = growingSpeed;
         this.shrinkingSpeed = shrinkingSpeed;
@@ -28,23 +38,22 @@ public class Blackhole : MonoBehaviour
         canGrow = true;
     }
 
-    void Update()
+    public void AddEnemyToList(Transform enemyTransform)
     {
-        timer -= Time.deltaTime;
-
-        Grow();
-        AttackWithinBlackhole();
-        Shrink();    
+        enemyTransforms.Add(enemyTransform);
     }
 
-    void AttackWithinBlackhole() {
-        if (maxAttackCount <= 0) {
+    void AttackWithinBlackhole()
+    {
+        if (maxAttackCount <= 0)
+        {
             canGrow = false;
             canShrink = true;
             return;
         }
 
-        if (timer < 0 && Input.GetKeyDown(KeyCode.R)) {
+        if (timer < 0 && Input.GetKeyDown(KeyCode.R))
+        {
             timer = cooldown;
 
             PlayerManager.instance.player.Disappear();
@@ -56,17 +65,22 @@ public class Blackhole : MonoBehaviour
             maxAttackCount--;
         }
     }
-    
-    void Grow() {
-        if (canGrow && !canShrink) {
+
+    void Grow()
+    {
+        if (canGrow && !canShrink)
+        {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(maxSize, maxSize), growingSpeed * Time.deltaTime);
         }
     }
 
-    void Shrink() {
-        if (canShrink && !canGrow) {
+    void Shrink()
+    {
+        if (canShrink && !canGrow)
+        {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0, 0), shrinkingSpeed * Time.deltaTime);
-            if (transform.localScale.magnitude <= 0.1f) {
+            if (transform.localScale.magnitude <= 0.1f)
+            {
                 PlayerManager.instance.player.ExitUltimateState();
                 DestroyAllHotkey();
                 Destroy(gameObject);
@@ -74,23 +88,29 @@ public class Blackhole : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         Enemy enemyComponent = other.GetComponent<Enemy>();
-        if (enemyComponent != null) {
+        if (enemyComponent != null)
+        {
             enemyComponent.Freeze();
             GenerateHotkey(other);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other)
+    {
         Enemy enemyComponent = other.GetComponent<Enemy>();
-        if (enemyComponent != null) {
+        if (enemyComponent != null)
+        {
             enemyComponent.Unfreeze();
         }
     }
 
-    void GenerateHotkey(Collider2D other) {
-        if (keyList.Count <= 0) {
+    void GenerateHotkey(Collider2D other)
+    {
+        if (keyList.Count <= 0)
+        {
             return;
         }
 
@@ -99,22 +119,21 @@ public class Blackhole : MonoBehaviour
 
         KeyCode randomKey = keyList[Random.Range(0, keyList.Count)];
         keyList.Remove(randomKey);
-        
+
         Hotkey hotkeyComponent = hotkey.GetComponent<Hotkey>();
         hotkeyComponent.Setup(randomKey, other.transform, this);
     }
 
-    void DestroyAllHotkey() {
-        if (hotkeyList.Count <= 0) {
+    void DestroyAllHotkey()
+    {
+        if (hotkeyList.Count <= 0)
+        {
             return;
         }
 
-        for (int i = 0; i < hotkeyList.Count; i++) {
+        for (int i = 0; i < hotkeyList.Count; i++)
+        {
             Destroy(hotkeyList[i]);
         }
-    }
-
-    public void AddEnemyToList(Transform enemyTransform) {
-        enemyTransforms.Add(enemyTransform);
     }
 }

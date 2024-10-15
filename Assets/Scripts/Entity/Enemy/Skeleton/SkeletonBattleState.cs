@@ -30,21 +30,29 @@ public class SkeletonBattleState : EnemyState
     {
         base.Update();
 
-        if (playerTransform.position.x > skeleton.transform.position.x) {
+        if (playerTransform.position.x > skeleton.transform.position.x)
+        {
             moveDir = 1;
-        } else if (playerTransform.position.x < skeleton.transform.position.x) {
+        }
+        else if (playerTransform.position.x < skeleton.transform.position.x)
+        {
             moveDir = -1;
         }
 
         skeleton.SetVelocity(skeleton.moveSpeed * moveDir, skeleton.rb.velocity.y);
 
-        if (skeleton.isPlayerDetected()) {
-            if (skeleton.isPlayerDetected().distance < skeleton.attackRange && Time.time > lastAttackTime + skeleton.attackCooldown) {
+        if (skeleton.isPlayerDetected())
+        {
+            if (skeleton.isPlayerDetected().distance < skeleton.attackRange && Time.time > lastAttackTime + skeleton.attackCooldown)
+            {
                 enemyStateMachine.ChangeState(skeleton.attackState);
                 lastAttackTime = Time.time;
             }
-        } else {
-            if (stateTimer < 0 || Vector2.Distance(skeleton.transform.position, playerTransform.position) > skeleton.battleRange) {
+        }
+        else
+        {
+            if (stateTimer < 0 || Vector2.Distance(skeleton.transform.position, playerTransform.position) > skeleton.battleRange)
+            {
                 enemyStateMachine.ChangeState(skeleton.idleState);
             }
         }

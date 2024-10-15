@@ -11,11 +11,13 @@ public class SkeletonAnimationEventHandler : MonoBehaviour
         enemyComponent = GetComponentInParent<Enemy>();
     }
 
-    private void OnEnterStunnable() {
+    private void OnEnterStunnable()
+    {
         enemyComponent.EnableCounterAttack();
     }
 
-    private void OnExitStunnable() {
+    private void OnExitStunnable()
+    {
         enemyComponent.DisableCounterAttack();
     }
 
@@ -24,13 +26,16 @@ public class SkeletonAnimationEventHandler : MonoBehaviour
         enemyComponent.OnExitAnimation();
     }
 
-    private void OnHit() {
+    private void OnHit()
+    {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(enemyComponent.attackChecker.position, enemyComponent.attackCheckerRadius);
 
-        foreach(Collider2D hitCollider in hitColliders) {
+        foreach (Collider2D hitCollider in hitColliders)
+        {
             Player playerComponent = hitCollider.GetComponent<Player>();
             PlayerStats playerStats = hitCollider.GetComponent<PlayerStats>();
-            if (playerComponent != null) {
+            if (playerComponent != null)
+            {
                 playerComponent.TakeDamage(enemyComponent);
             }
         }

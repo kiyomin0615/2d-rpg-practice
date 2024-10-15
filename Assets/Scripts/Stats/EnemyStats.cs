@@ -13,11 +13,13 @@ public class EnemyStats : Stats
         enemyComponent = GetComponent<Enemy>();
     }
 
-    public override void ReduceHP(Entity subject) {
+    public override void ReduceHP(Entity subject)
+    {
         base.ReduceHP(subject);
     }
 
-    protected override void Die() {
+    protected override void Die()
+    {
         base.Die();
 
         enemyComponent.Die();
