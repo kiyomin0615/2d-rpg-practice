@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,8 @@ public class Entity : MonoBehaviour
     public int facingDir { get; private set; } = 1;
     public bool facingRight = true;
 
+    public Action onFlip = null;
+
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -42,20 +45,21 @@ public class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        
+
     }
 
     public virtual bool IsGroundDetected()
     {
-       return Physics2D.Raycast(groundChecker.position, Vector2.down, distToGround, groundLayer);
+        return Physics2D.Raycast(groundChecker.position, Vector2.down, distToGround, groundLayer);
     }
 
     public virtual bool IsWallDetected()
     {
-       return Physics2D.Raycast(wallChecker.position, Vector2.right * facingDir, distToWall, groundLayer);
+        return Physics2D.Raycast(wallChecker.position, Vector2.right * facingDir, distToWall, groundLayer);
     }
 
-    protected virtual void OnDrawGizmos() {
+    protected virtual void OnDrawGizmos()
+    {
         Gizmos.DrawLine(groundChecker.position, new Vector2(groundChecker.position.x, groundChecker.position.y - distToGround));
         Gizmos.DrawLine(wallChecker.position, new Vector2(wallChecker.position.x + (distToWall * facingDir), wallChecker.position.y));
         Gizmos.DrawWireSphere(attackChecker.position, attackCheckerRadius);
@@ -72,6 +76,11 @@ public class Entity : MonoBehaviour
         facingDir = -facingDir;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
+
+        if (onFlip != null)
+        {
+            onFlip();
+        }
     }
 
     public virtual void SetVelocity(float _xVelocity, float _yVelocity)
@@ -80,20 +89,24 @@ public class Entity : MonoBehaviour
         ControlFlip(_xVelocity);
     }
 
-    public virtual void TakeDamage(Entity subject) {
-        stats.ReduceHp(subject);
+    public virtual void TakeDamage(Entity subject)
+    {
+        stats.ReduceHP(subject);
         Debug.Log($"{gameObject.name} got damaged.");
         effects.StartCoroutine("ApplyHitEffect");
     }
 
-    public void Appear() {
+    public void Appear()
+    {
         spriteRenderer.color = Color.white;
     }
 
-    public void Disappear() {
+    public void Disappear()
+    {
         spriteRenderer.color = Color.clear;
     }
 
-    public virtual void Die() {
+    public virtual void Die()
+    {
     }
 }

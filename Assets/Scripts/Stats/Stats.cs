@@ -8,25 +8,27 @@ public class Stats : MonoBehaviour
     [Header("Basic Stats")]
     public Stat strength; // 1 strength = 1 damage + 1% critical damage
     public Stat agility; // 1 agility = 1 evasion + 1% critical chance
-    public Stat vitality; // 1 vitality = 5 hp
+    public Stat vitality; // 1 vitality = 5 HP
 
     [Header("Other Stats")]
     public Stat damage;
     public Stat criticalChange; // percentage
     public Stat criticalDamagePercentage; // percentage
-    public Stat maxHp;
+    public Stat basicHP;
     public Stat armor;
     public Stat evasion;
 
-    [SerializeField] public int currentHp;
+    [SerializeField] public int currentHP;
+
+    public Action onHPChanged = null;
 
     protected virtual void Start()
     {
-        currentHp = maxHp.GetValue();
+        currentHP = CalculateMaxHP();
         criticalDamagePercentage.SetDefaultValue(150); // 150%
     }
 
-    public virtual void ReduceHp(Entity subject)
+    public virtual void ReduceHP(Entity subject)
     {
         if (CanAvoidAttack())
             return;
@@ -39,14 +41,21 @@ public class Stats : MonoBehaviour
 
         totalDamage = CalculateTotalDamage(totalDamage);
 
-        currentHp -= totalDamage;
+        currentHP -= totalDamage;
+
+        onHPChanged(); // Update HP Bar UI
 
         Debug.Log($"Damage: {totalDamage}");
 
-        if (currentHp < 0)
+        if (currentHP < 0)
         {
             Die();
         }
+    }
+
+    public int CalculateMaxHP()
+    {
+        return basicHP.GetValue() + vitality.GetValue() * 5;
     }
 
     protected virtual void Die()

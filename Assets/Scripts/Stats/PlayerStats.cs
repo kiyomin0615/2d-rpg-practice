@@ -13,8 +13,8 @@ public class PlayerStats : Stats
         playerComponent = PlayerManager.instance.player;
     }
 
-    public override void ReduceHp(Entity subject) {
-        base.ReduceHp(subject);
+    public override void ReduceHP(Entity subject) {
+        base.ReduceHP(subject);
     }
 
     protected override void Die() {
