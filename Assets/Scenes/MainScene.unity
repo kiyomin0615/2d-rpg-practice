@@ -801,7 +801,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   currentHP: 0
-  level: 1
+  level: 20
   multiplier: 0.4
 --- !u!70 &130827540
 CapsuleCollider2D:
@@ -1091,6 +1091,7 @@ MonoBehaviour:
   - {x: 3, y: 1.5}
   - {x: 1, y: 2.5}
   - {x: 4, y: 1.5}
+  dropPrefab: {fileID: 4675470584486234569, guid: 1fcfeb6fe7bfd0148840620fe749fb6d, type: 3}
 --- !u!114 &195869002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3633,7 +3634,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   currentHP: 0
-  level: 1
+  level: 20
   multiplier: 0.4
 --- !u!114 &1022472750
 MonoBehaviour:

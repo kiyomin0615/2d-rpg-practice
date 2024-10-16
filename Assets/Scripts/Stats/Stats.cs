@@ -22,7 +22,7 @@ public class Stats : MonoBehaviour
 
     public Action onHPChanged = null;
 
-    protected bool isDead = false;
+    public bool isDead { get; private set; } = false;
 
     protected virtual void Start()
     {

@@ -22,6 +22,9 @@ public class Player : Entity
     [Header("Battle")]
     public Vector2[] attackVelocityList;
 
+    [Header("Drop")]
+    [SerializeField] GameObject dropPrefab;
+
     #region State
     public PlayerStateMachine stateMachine { get; private set; }
     public PlayerIdleState idleState { get; private set; }
@@ -109,6 +112,8 @@ public class Player : Entity
     {
         base.Die();
 
+        DropAllEquipments();
+
         stateMachine.ChangeState(dieState);
     }
 
@@ -135,6 +140,29 @@ public class Player : Entity
             if (dashDir == 0)
                 dashDir = facingDir;
             stateMachine.ChangeState(dashState);
+        }
+    }
+
+    void DropItem(ItemData itemData)
+    {
+        GameObject dropItemObject = Instantiate(dropPrefab, transform.position, Quaternion.identity);
+        dropItemObject.GetComponent<ItemObject>().SetupItemData(itemData);
+    }
+
+    void DropAllEquipments()
+    {
+        List<Item> dropEquipmentObjectList = new List<Item>();
+
+        for (int i = 0; i < Inventory.instance.equipments.Count; i++)
+        {
+            dropEquipmentObjectList.Add(Inventory.instance.equipments[i]);
+        }
+
+        for (int i = 0; i < dropEquipmentObjectList.Count; i++)
+        {
+            Item dropEquipment = dropEquipmentObjectList[i];
+            DropItem(dropEquipment.itemData);
+            Inventory.instance.UnEquip(dropEquipment.itemData as EquipmentData);
         }
     }
 }
