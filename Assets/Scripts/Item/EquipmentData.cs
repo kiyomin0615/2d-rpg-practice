@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum EquipmentType
@@ -24,6 +25,9 @@ public class EquipmentData : ItemData
     public int basicHP;
     public int armor;
     public int evasion;
+
+    [Header("Craft")]
+    public List<Item> requirements;
 
     public void AddModifiers()
     {

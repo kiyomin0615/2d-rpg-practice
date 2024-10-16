@@ -19,7 +19,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] Transform equipmentSlotsParentTransform;
     [SerializeField] UI_EquipmentSlot[] equipmentSlots;
 
-
     void Awake()
     {
         if (instance == null)
@@ -109,6 +108,40 @@ public class Inventory : MonoBehaviour
         oldEquipmentData.RemoveModifiers();
 
         AddItem(oldEquipmentData);
+    }
+
+    public bool CanCraft(EquipmentData equipmentData, List<Item> requirements)
+    {
+        List<Item> listToRemoveFromInventory = new List<Item>();
+
+        for (int i = 0; i < requirements.Count; i++)
+        {
+            if (dictionary.TryGetValue(requirements[i].itemData, out Item value))
+            {
+                if (value.count < requirements[i].count)
+                {
+                    Debug.Log("Not enough requirements.");
+                    return false;
+                }
+                else
+                {
+                    listToRemoveFromInventory.Add(value);
+                }
+            }
+            else
+            {
+                Debug.Log("Not enough requirements.");
+                return false;
+            }
+        }
+
+        for (int i = 0; i < listToRemoveFromInventory.Count; i++)
+        {
+            RemoveItem(listToRemoveFromInventory[i].itemData);
+        }
+
+        AddItem(equipmentData);
+        return true;
     }
 
     void UpdateItemSlotsUI()

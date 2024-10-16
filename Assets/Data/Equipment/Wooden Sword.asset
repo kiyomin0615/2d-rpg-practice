@@ -25,3 +25,8 @@ MonoBehaviour:
   basicHP: 0
   armor: 0
   evasion: 0
+  requirements:
+  - itemData: {fileID: 11400000, guid: 53a1d6d1332bedf4ab61711cb1868895, type: 2}
+    count: 1
+  - itemData: {fileID: 11400000, guid: 385ad3207e21b6d42b374b15c9fe0ad7, type: 2}
+    count: 1
