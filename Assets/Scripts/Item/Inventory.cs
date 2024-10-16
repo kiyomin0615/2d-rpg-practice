@@ -10,9 +10,14 @@ public class Inventory : MonoBehaviour
     public List<Item> inventory = new List<Item>();
     public Dictionary<ItemData, Item> dictionary;
 
+    public List<Item> equipments = new List<Item>();
+    public Dictionary<EquipmentData, Item> equipmentDictionary;
+
     [Header("UI")]
     [SerializeField] Transform itemSlotsParentTransform;
     [SerializeField] UI_ItemSlot[] itemSlots;
+    [SerializeField] Transform equipmentSlotsParentTransform;
+    [SerializeField] UI_EquipmentSlot[] equipmentSlots;
 
 
     void Awake()
@@ -26,17 +31,13 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         inventory = new List<Item>();
+        equipments = new List<Item>();
+
         dictionary = new Dictionary<ItemData, Item>();
+        equipmentDictionary = new Dictionary<EquipmentData, Item>();
 
         itemSlots = itemSlotsParentTransform.GetComponentsInChildren<UI_ItemSlot>();
-    }
-
-    void UpdateItemSlotsUI()
-    {
-        for (int i = 0; i < inventory.Count; i++)
-        {
-            itemSlots[i].UpdateItemSlotUI(inventory[i]);
-        }
+        equipmentSlots = equipmentSlotsParentTransform.GetComponentsInChildren<UI_EquipmentSlot>();
     }
 
     public void AddItem(ItemData itemData)
@@ -55,7 +56,7 @@ public class Inventory : MonoBehaviour
         UpdateItemSlotsUI();
     }
 
-    public void RemoveIte(ItemData itemData)
+    public void RemoveItem(ItemData itemData)
     {
         if (dictionary.TryGetValue(itemData, out Item item))
         {
@@ -72,4 +73,61 @@ public class Inventory : MonoBehaviour
 
         UpdateItemSlotsUI();
     }
+
+    public void Equip(EquipmentData equipmentData)
+    {
+        Item equipment = new Item(equipmentData);
+
+        EquipmentData oldEquipmentData = null;
+
+        foreach (KeyValuePair<EquipmentData, Item> pair in equipmentDictionary)
+        {
+            if (pair.Key.equipmentType == equipmentData.equipmentType)
+                oldEquipmentData = pair.Key;
+        }
+
+        // if the same type of equipment is already equipped, replace it
+        if (oldEquipmentData != null)
+        {
+            UnEquip(oldEquipmentData);
+        }
+
+        equipments.Add(equipment);
+        equipmentDictionary.Add(equipmentData, equipment);
+        RemoveItem(equipmentData);
+    }
+
+    void UnEquip(EquipmentData oldEquipmentData)
+    {
+        if (equipmentDictionary.TryGetValue(oldEquipmentData, out Item value))
+        {
+            equipments.Remove(value);
+            equipmentDictionary.Remove(oldEquipmentData);
+        }
+
+        AddItem(oldEquipmentData);
+    }
+
+    void UpdateItemSlotsUI()
+    {
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            itemSlots[i].ClearItemSlotUI();
+        }
+
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            itemSlots[i].UpdateItemSlotUI(inventory[i]);
+        }
+
+        for (int i = 0; i < equipmentSlots.Length; i++)
+        {
+            foreach (KeyValuePair<EquipmentData, Item> pair in equipmentDictionary)
+            {
+                if (pair.Key.equipmentType == equipmentSlots[i].equipmentType)
+                    equipmentSlots[i].UpdateItemSlotUI(pair.Value);
+            }
+        }
+    }
+
 }
