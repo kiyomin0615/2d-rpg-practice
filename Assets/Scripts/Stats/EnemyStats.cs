@@ -12,7 +12,6 @@ public class EnemyStats : Stats
     [Range(0f, 1f)]
     [SerializeField] float multiplier = 0.4f;
 
-
     protected override void Start()
     {
         ApplyAllModifiers();

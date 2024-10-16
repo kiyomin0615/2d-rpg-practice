@@ -10,7 +10,6 @@ public class Enemy : Entity
     public float moveSpeed = 3f;
     public float idleDuration = 2f;
 
-
     [Header("Battle")]
     public float battleRange = 10f;
     public float battleDuration = 5f;
@@ -18,6 +17,12 @@ public class Enemy : Entity
     public float attackCooldown = 1f;
     public float stunDuration = 1f;
     public bool stunnable = false;
+
+    [Header("Drop")]
+    [SerializeField] GameObject dropPrefab;
+    [SerializeField] ItemData[] droppableList;
+    [SerializeField] List<ItemData> dropItemDataList = new List<ItemData>();
+    [SerializeField] int dropAmount = 3;
 
     public EnemyStateMachine stateMachine { get; private set; }
 
@@ -40,6 +45,11 @@ public class Enemy : Entity
         base.Update();
 
         stateMachine.currentState.Update();
+    }
+
+    public override void Die()
+    {
+        GenerateDropItemObject();
     }
 
     protected override void OnDrawGizmos()
@@ -87,5 +97,33 @@ public class Enemy : Entity
     public void SetLastAnimatorParam(string param)
     {
         lastAnimatorParam = param;
+    }
+
+    void DropItem(ItemData itemData)
+    {
+        GameObject dropItemObject = Instantiate(dropPrefab, transform.position, Quaternion.identity);
+        dropItemObject.GetComponent<ItemObject>().SetupItemData(itemData);
+    }
+
+    void GenerateDropItemObject()
+    {
+        for (int i = 0; i < droppableList.Length; i++)
+        {
+            if (Random.Range(0f, 1f) < droppableList[i].dropChance)
+            {
+                dropItemDataList.Add(droppableList[i]);
+            }
+        }
+
+
+        for (int i = 0; i < dropAmount; i++)
+        {
+            if (dropItemDataList.Count == 0)
+                return;
+
+            ItemData itemData = dropItemDataList[Random.Range(0, dropItemDataList.Count)];
+            dropItemDataList.Remove(itemData);
+            DropItem(itemData);
+        }
     }
 }
