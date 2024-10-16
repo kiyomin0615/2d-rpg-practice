@@ -10,9 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7c9888cdcd139b4d8058d00ac1522ef, type: 3}
-  m_Name: Basic Armor
+  m_Name: Iron Sword
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Basic Armor
-  itemIcon: {fileID: -1581127718, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
-  equipmentType: 1
+  itemName: Iron Sword
+  itemIcon: {fileID: 1526008332, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  equipmentType: 0
+  strength: 20
+  agility: 0
+  vitality: 0
+  damage: 10
+  criticalChange: 10
+  criticalDamagePercentage: 10
+  basicHP: 0
+  armor: 0
+  evasion: 0

@@ -498,22 +498,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength:
     baseValue: 3
+    modifiers: 
   agility:
     baseValue: 3
+    modifiers: 
   vitality:
     baseValue: 3
+    modifiers: 
   damage:
     baseValue: 5
+    modifiers: 
   criticalChange:
     baseValue: 100
+    modifiers: 
   criticalDamagePercentage:
     baseValue: 150
+    modifiers: 
   basicHP:
     baseValue: 0
+    modifiers: 
   armor:
     baseValue: 0
+    modifiers: 
   evasion:
     baseValue: 0
+    modifiers: 
   currentHP: 0
 --- !u!70 &130827540
 CapsuleCollider2D:
@@ -830,22 +839,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength:
     baseValue: 5
+    modifiers: 
   agility:
     baseValue: 5
+    modifiers: 
   vitality:
     baseValue: 5
+    modifiers: 
   damage:
     baseValue: 10
+    modifiers: 
   criticalChange:
     baseValue: 0
+    modifiers: 
   criticalDamagePercentage:
     baseValue: 0
+    modifiers: 
   basicHP:
-    baseValue: 0
+    baseValue: 100
+    modifiers: 
   armor:
     baseValue: 10
+    modifiers: 
   evasion:
     baseValue: 0
+    modifiers: 
   currentHP: 0
 --- !u!1 &238559240
 GameObject:

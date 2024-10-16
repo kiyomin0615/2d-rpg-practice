@@ -35,7 +35,7 @@ public class Stats : MonoBehaviour
         if (CanAvoidAttack())
             return;
 
-        int totalDamage = damage.GetValue() + strength.GetValue();
+        int totalDamage = subject.stats.damage.GetValue() + subject.stats.strength.GetValue();
         if (IsCriticalHit())
         {
             totalDamage = CalculateCriticalDamage(totalDamage);

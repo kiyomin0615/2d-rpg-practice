@@ -1,12 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class Stat
 {
     [SerializeField] int baseValue;
-    List<int> modifiers = new List<int>();
+    [SerializeField] List<int> modifiers = new List<int>();
 
     public int GetValue()
     {
@@ -30,8 +31,8 @@ public class Stat
         modifiers.Add(modifier);
     }
 
-    public void RemoveModifier(int index)
+    public void RemoveModifier(int modifier)
     {
-        modifiers.RemoveAt(index);
+        modifiers.Remove(modifier);
     }
 }

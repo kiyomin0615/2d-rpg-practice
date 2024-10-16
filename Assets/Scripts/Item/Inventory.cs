@@ -94,6 +94,7 @@ public class Inventory : MonoBehaviour
 
         equipments.Add(equipment);
         equipmentDictionary.Add(equipmentData, equipment);
+        equipmentData.AddModifiers();
         RemoveItem(equipmentData);
     }
 
@@ -104,6 +105,8 @@ public class Inventory : MonoBehaviour
             equipments.Remove(value);
             equipmentDictionary.Remove(oldEquipmentData);
         }
+
+        oldEquipmentData.RemoveModifiers();
 
         AddItem(oldEquipmentData);
     }
