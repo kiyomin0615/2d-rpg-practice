@@ -10,6 +10,11 @@ public class Inventory : MonoBehaviour
     public List<Item> inventory = new List<Item>();
     public Dictionary<ItemData, Item> dictionary;
 
+    [Header("UI")]
+    [SerializeField] Transform itemSlotsParentTransform;
+    [SerializeField] UI_ItemSlot[] itemSlots;
+
+
     void Awake()
     {
         if (instance == null)
@@ -22,11 +27,16 @@ public class Inventory : MonoBehaviour
     {
         inventory = new List<Item>();
         dictionary = new Dictionary<ItemData, Item>();
+
+        itemSlots = itemSlotsParentTransform.GetComponentsInChildren<UI_ItemSlot>();
     }
 
-    void Update()
+    void UpdateItemSlotsUI()
     {
-
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            itemSlots[i].UpdateItemSlotUI(inventory[i]);
+        }
     }
 
     public void AddItem(ItemData itemData)
@@ -41,6 +51,8 @@ public class Inventory : MonoBehaviour
             inventory.Add(newItem);
             dictionary.Add(itemData, newItem);
         }
+
+        UpdateItemSlotsUI();
     }
 
     public void RemoveIte(ItemData itemData)
@@ -57,5 +69,7 @@ public class Inventory : MonoBehaviour
                 item.DecreaseItemStack();
             }
         }
+
+        UpdateItemSlotsUI();
     }
 }

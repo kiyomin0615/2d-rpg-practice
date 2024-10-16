@@ -8,13 +8,15 @@ public class ItemObject : MonoBehaviour
 
     [SerializeField] ItemData itemData;
 
-    void Start()
+    private void OnValidate()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = itemData.itemIcon;
+        gameObject.name = "Item Object - " + itemData.itemName;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         Player player = other.GetComponent<Player>();
         if (player != null)
         {
