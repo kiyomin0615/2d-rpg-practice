@@ -515,7 +515,7 @@ MonoBehaviour:
     baseValue: 150
     modifiers: 
   basicHP:
-    baseValue: 0
+    baseValue: 50
     modifiers: 
   armor:
     baseValue: 0
@@ -524,6 +524,8 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   currentHP: 0
+  level: 10
+  multiplier: 0.4
 --- !u!70 &130827540
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
