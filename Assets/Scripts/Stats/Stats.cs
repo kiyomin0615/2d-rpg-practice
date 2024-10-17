@@ -3,6 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StatType
+{
+    Strength,
+    Agility,
+    Vitality,
+    Damage,
+    CriticalChance,
+    CriticalDamage,
+    BasicHP,
+    Armor,
+    Evasion
+}
+
 public class Stats : MonoBehaviour
 {
     [Header("Basic Stats")]
@@ -12,7 +25,7 @@ public class Stats : MonoBehaviour
 
     [Header("Other Stats")]
     public Stat damage;
-    public Stat criticalChange; // percentage
+    public Stat criticalChancePercentage; // percentage
     public Stat criticalDamagePercentage; // percentage
     public Stat basicHP;
     public Stat armor;
@@ -24,10 +37,55 @@ public class Stats : MonoBehaviour
 
     public bool isDead { get; private set; } = false;
 
+    protected virtual void Awake()
+    {
+        criticalChancePercentage.SetDefaultValue(10); // 10%
+        criticalDamagePercentage.SetDefaultValue(150); // 150%
+    }
+
     protected virtual void Start()
     {
         currentHP = CalculateMaxHP();
-        criticalDamagePercentage.SetDefaultValue(150); // 150%
+    }
+
+    public int GetStatValue(StatType statType)
+    {
+        int value = 0;
+
+        switch (statType)
+        {
+            case StatType.Strength:
+                value = strength.GetValue();
+                break;
+            case StatType.Agility:
+                value = agility.GetValue();
+                break;
+            case StatType.Vitality:
+                value = vitality.GetValue();
+                break;
+            case StatType.Damage:
+                value = damage.GetValue();
+                break;
+            case StatType.CriticalChance:
+                value = criticalChancePercentage.GetValue();
+                break;
+            case StatType.CriticalDamage:
+                value = criticalDamagePercentage.GetValue();
+                break;
+            case StatType.BasicHP:
+                value = basicHP.GetValue();
+                break;
+            case StatType.Armor:
+                value = armor.GetValue();
+                break;
+            case StatType.Evasion:
+                value = evasion.GetValue();
+                break;
+            default:
+                break;
+        }
+
+        return value;
     }
 
     public virtual void ReduceHP(Entity subject)
@@ -80,7 +138,7 @@ public class Stats : MonoBehaviour
 
     bool IsCriticalHit()
     {
-        int totalCriticalChange = criticalChange.GetValue() + agility.GetValue();
+        int totalCriticalChange = criticalChancePercentage.GetValue() + agility.GetValue();
         if (UnityEngine.Random.Range(0, 100) < totalCriticalChange)
         {
             return true;

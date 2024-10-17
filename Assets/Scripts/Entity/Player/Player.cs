@@ -153,16 +153,16 @@ public class Player : Entity
     {
         List<Item> dropEquipmentObjectList = new List<Item>();
 
-        for (int i = 0; i < Inventory.instance.equipments.Count; i++)
+        for (int i = 0; i < ItemManager.instance.equipments.Count; i++)
         {
-            dropEquipmentObjectList.Add(Inventory.instance.equipments[i]);
+            dropEquipmentObjectList.Add(ItemManager.instance.equipments[i]);
         }
 
         for (int i = 0; i < dropEquipmentObjectList.Count; i++)
         {
             Item dropEquipment = dropEquipmentObjectList[i];
             DropItem(dropEquipment.itemData);
-            Inventory.instance.UnEquip(dropEquipment.itemData as EquipmentData);
+            ItemManager.instance.UnEquip(dropEquipment.itemData as EquipmentData);
         }
     }
 }

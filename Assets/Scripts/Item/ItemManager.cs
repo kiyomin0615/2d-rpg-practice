@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class ItemManager : MonoBehaviour
 {
-    public static Inventory instance;
+    public static ItemManager instance;
 
     public List<Item> inventory = new List<Item>();
     public Dictionary<ItemData, Item> dictionary;
@@ -18,6 +19,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] UI_ItemSlot[] itemSlots;
     [SerializeField] Transform equipmentSlotsParentTransform;
     [SerializeField] UI_EquipmentSlot[] equipmentSlots;
+    [SerializeField] Transform statSlotsParentTransform;
+    [SerializeField] UI_StatSlot[] statSlots;
 
     void Awake()
     {
@@ -37,6 +40,7 @@ public class Inventory : MonoBehaviour
 
         itemSlots = itemSlotsParentTransform.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlots = equipmentSlotsParentTransform.GetComponentsInChildren<UI_EquipmentSlot>();
+        statSlots = statSlotsParentTransform.GetComponentsInChildren<UI_StatSlot>();
     }
 
     public void AddItem(ItemData itemData)
@@ -52,7 +56,7 @@ public class Inventory : MonoBehaviour
             dictionary.Add(itemData, newItem);
         }
 
-        UpdateItemSlotsUI();
+        UpdateSlotsUI();
     }
 
     public void RemoveItem(ItemData itemData)
@@ -70,7 +74,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        UpdateItemSlotsUI();
+        UpdateSlotsUI();
     }
 
     public void Equip(EquipmentData equipmentData)
@@ -112,7 +116,7 @@ public class Inventory : MonoBehaviour
 
     public bool CanCraft(EquipmentData equipmentData, List<Item> requirements)
     {
-        List<Item> listToRemoveFromInventory = new List<Item>();
+        List<Item> listToRemoveFromItemManager = new List<Item>();
 
         for (int i = 0; i < requirements.Count; i++)
         {
@@ -125,7 +129,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    listToRemoveFromInventory.Add(value);
+                    listToRemoveFromItemManager.Add(value);
                 }
             }
             else
@@ -135,16 +139,16 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < listToRemoveFromInventory.Count; i++)
+        for (int i = 0; i < listToRemoveFromItemManager.Count; i++)
         {
-            RemoveItem(listToRemoveFromInventory[i].itemData);
+            RemoveItem(listToRemoveFromItemManager[i].itemData);
         }
 
         AddItem(equipmentData);
         return true;
     }
 
-    void UpdateItemSlotsUI()
+    void UpdateSlotsUI()
     {
         for (int i = 0; i < itemSlots.Length; i++)
         {
@@ -164,6 +168,10 @@ public class Inventory : MonoBehaviour
                     equipmentSlots[i].UpdateItemSlotUI(pair.Value);
             }
         }
-    }
 
+        for (int i = 0; i < statSlots.Length; i++)
+        {
+            statSlots[i].UpdateStatSlotUI();
+        }
+    }
 }

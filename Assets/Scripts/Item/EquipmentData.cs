@@ -38,7 +38,7 @@ public class EquipmentData : ItemData
         playerStats.vitality.AddModifier(vitality);
 
         playerStats.damage.AddModifier(damage);
-        playerStats.criticalChange.AddModifier(criticalChange);
+        playerStats.criticalChancePercentage.AddModifier(criticalChange);
         playerStats.criticalDamagePercentage.AddModifier(criticalDamagePercentage);
 
         playerStats.basicHP.AddModifier(basicHP);
@@ -55,7 +55,7 @@ public class EquipmentData : ItemData
         playerStats.vitality.RemoveModifier(vitality);
 
         playerStats.damage.RemoveModifier(damage);
-        playerStats.criticalChange.RemoveModifier(criticalChange);
+        playerStats.criticalChancePercentage.RemoveModifier(criticalChange);
         playerStats.criticalDamagePercentage.RemoveModifier(criticalDamagePercentage);
 
         playerStats.basicHP.RemoveModifier(basicHP);

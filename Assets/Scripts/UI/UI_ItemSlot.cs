@@ -10,7 +10,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
     public Item item;
 
-    public void ClearItemSlotUI()
+    public virtual void ClearItemSlotUI()
     {
         this.item = null;
 
@@ -41,15 +41,18 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        if (item == null || item.itemData == null)
+            return;
+
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            Inventory.instance.RemoveItem(item.itemData);
+            ItemManager.instance.RemoveItem(item.itemData);
             return;
         }
 
         if (item.itemData.itemType == ItemType.Equipment)
         {
-            Inventory.instance.Equip(item.itemData as EquipmentData);
+            ItemManager.instance.Equip(item.itemData as EquipmentData);
         }
     }
 }

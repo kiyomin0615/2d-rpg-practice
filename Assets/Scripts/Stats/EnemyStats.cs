@@ -47,7 +47,7 @@ public class EnemyStats : Stats
         ModifyStatByLevel(agility);
         ModifyStatByLevel(vitality);
         ModifyStatByLevel(damage);
-        ModifyStatByLevel(criticalChange);
+        ModifyStatByLevel(criticalChancePercentage);
         ModifyStatByLevel(criticalDamagePercentage);
         ModifyStatByLevel(basicHP);
         ModifyStatByLevel(armor);

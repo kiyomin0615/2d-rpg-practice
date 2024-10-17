@@ -14,6 +14,6 @@ public class UI_CraftSlot : UI_ItemSlot
     {
         EquipmentData craftData = item.itemData as EquipmentData;
 
-        Inventory.instance.CanCraft(craftData, craftData.requirements);
+        ItemManager.instance.CanCraft(craftData, craftData.requirements);
     }
 }
