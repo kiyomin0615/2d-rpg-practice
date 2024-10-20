@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7c9888cdcd139b4d8058d00ac1522ef, type: 3}
-  m_Name: Wooden Sword
+  m_Name: Gold Amulet
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Wooden Sword
-  itemIcon: {fileID: 1025091068, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemName: Gold Amulet
+  itemIcon: {fileID: -245851270, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   dropChance: 0.4
-  equipmentType: 0
+  equipmentType: 2
   strength: 10
-  agility: 0
-  vitality: 0
-  damage: 5
-  criticalChange: 5
-  criticalDamagePercentage: 5
-  basicHP: 0
-  armor: 0
-  evasion: 0
+  agility: 10
+  vitality: 10
+  damage: 10
+  criticalChange: 10
+  criticalDamagePercentage: 10
+  basicHP: 10
+  armor: 10
+  evasion: 10
   requirements:
   - itemData: {fileID: 11400000, guid: 53a1d6d1332bedf4ab61711cb1868895, type: 2}
     count: 1

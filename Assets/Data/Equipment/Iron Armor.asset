@@ -10,22 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7c9888cdcd139b4d8058d00ac1522ef, type: 3}
-  m_Name: Basic Armor
+  m_Name: Iron Armor
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Basic Armor
-  itemIcon: {fileID: 1667790894, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemName: Iron Armor
+  itemIcon: {fileID: -1547736094, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   dropChance: 0.4
   equipmentType: 1
-  strength: 0
+  strength: 5
   agility: 0
-  vitality: 0
-  damage: 0
+  vitality: 20
+  damage: 5
   criticalChange: 0
   criticalDamagePercentage: 0
-  basicHP: 10
-  armor: 5
-  evasion: 5
+  basicHP: 50
+  armor: 20
+  evasion: 0
   requirements:
-  - itemData: {fileID: 11400000, guid: 05cbc32d34d0eb4479bd411728b75158, type: 2}
+  - itemData: {fileID: 11400000, guid: 53a1d6d1332bedf4ab61711cb1868895, type: 2}
+    count: 1
+  - itemData: {fileID: 11400000, guid: 385ad3207e21b6d42b374b15c9fe0ad7, type: 2}
     count: 1
