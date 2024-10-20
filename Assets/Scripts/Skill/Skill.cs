@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
-  [SerializeField] protected float cooldown;
-  [SerializeField] protected float timer;
+  [SerializeField] public float cooldown;
+  [SerializeField] public float timer;
 
   protected virtual void Start()
   {
