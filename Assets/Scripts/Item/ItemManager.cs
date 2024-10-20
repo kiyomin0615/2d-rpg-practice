@@ -45,6 +45,9 @@ public class ItemManager : MonoBehaviour
 
     public void AddItem(ItemData itemData)
     {
+        if (IsInventoryFull())
+            return;
+
         if (dictionary.TryGetValue(itemData, out Item item))
         {
             item.IncreaseItemStack();
@@ -146,6 +149,14 @@ public class ItemManager : MonoBehaviour
 
         AddItem(equipmentData);
         return true;
+    }
+
+    public bool IsInventoryFull()
+    {
+        if (inventory.Count >= itemSlots.Length)
+            return true;
+        else
+            return false;
     }
 
     void UpdateSlotsUI()

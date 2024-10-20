@@ -8,8 +8,13 @@ public class ItemObject : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
 
     [SerializeField] ItemData itemData;
-    
+
     [SerializeField] Vector2 velocity;
+
+    private void Start()
+    {
+        SetupItemData(itemData);
+    }
 
     public void SetupItemData(ItemData itemData)
     {
@@ -27,6 +32,9 @@ public class ItemObject : MonoBehaviour
 
     public void PickupItem()
     {
+        if (ItemManager.instance.IsInventoryFull())
+            return;
+
         ItemManager.instance.AddItem(itemData);
         Destroy(gameObject);
     }
