@@ -24,6 +24,7 @@ public class ItemManager : MonoBehaviour, ISaveManager
     [SerializeField] UI_StatSlot[] statSlots;
 
     List<Item> loadedItems = new List<Item>();
+    List<EquipmentData> loadedEquipments = new List<EquipmentData>();
 
     void Awake()
     {
@@ -37,6 +38,7 @@ public class ItemManager : MonoBehaviour, ISaveManager
     {
         Init();
         InitInventory();
+        InitEquipments();
     }
 
     void Init()
@@ -64,8 +66,17 @@ public class ItemManager : MonoBehaviour, ISaveManager
                 }
             }
         }
+    }
 
-        return;
+    void InitEquipments()
+    {
+        if (loadedEquipments != null || loadedEquipments.Count > 0)
+        {
+            foreach (EquipmentData equipmentData in loadedEquipments)
+            {
+                Equip(equipmentData);
+            }
+        }
     }
 
     public void AddItem(ItemData itemData)
@@ -214,15 +225,24 @@ public class ItemManager : MonoBehaviour, ISaveManager
     public void SaveData(ref GameData gameData)
     {
         gameData.inventory.Clear();
+        gameData.equipmentIdList.Clear();
 
         foreach (KeyValuePair<ItemData, Item> pair in dictionary)
         {
             gameData.inventory.Add(pair.Key.itemId, pair.Value.count); // id - count
         }
+
+        foreach (KeyValuePair<EquipmentData, Item> pair in equipmentDictionary)
+        {
+            gameData.equipmentIdList.Add(pair.Key.itemId);
+        }
     }
 
     public void LoadData(GameData gameData)
     {
+        if (gameData == null)
+            return;
+
         foreach (KeyValuePair<string, int> pair in gameData.inventory)
         {
             foreach (ItemData itemData in GetItemDatabase())
@@ -235,12 +255,23 @@ public class ItemManager : MonoBehaviour, ISaveManager
                 }
             }
         }
+
+        foreach (string equipmentId in gameData.equipmentIdList)
+        {
+            foreach (EquipmentData equipmentData in GetEquipmentDatabase())
+            {
+                if (equipmentData != null && equipmentData.itemId == equipmentId)
+                {
+                    loadedEquipments.Add(equipmentData);
+                }
+            }
+        }
     }
 
     List<ItemData> GetItemDatabase()
     {
         List<ItemData> itemDatabase = new List<ItemData>();
-        string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/" }); // GUID
+        string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Item" }); // GUID
         foreach (string assetName in assetNames)
         {
             string itemPath = AssetDatabase.GUIDToAssetPath(assetName);
@@ -249,5 +280,19 @@ public class ItemManager : MonoBehaviour, ISaveManager
         }
 
         return itemDatabase;
+    }
+
+    List<EquipmentData> GetEquipmentDatabase()
+    {
+        List<EquipmentData> equipmentDatabase = new List<EquipmentData>();
+        string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Equipment" }); // GUID
+        foreach (string assetName in assetNames)
+        {
+            string itemPath = AssetDatabase.GUIDToAssetPath(assetName);
+            EquipmentData equipmentData = AssetDatabase.LoadAssetAtPath<EquipmentData>(itemPath);
+            equipmentDatabase.Add(equipmentData);
+        }
+
+        return equipmentDatabase;
     }
 }
