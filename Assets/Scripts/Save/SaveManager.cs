@@ -57,7 +57,7 @@ public class SaveManager : MonoBehaviour
             saveManager.SaveData(ref this.gameData);
         }
 
-        dataHandler.Save(gameData);
+        dataHandler.Save(this.gameData);
 
         Debug.Log("Game Saved.");
     }

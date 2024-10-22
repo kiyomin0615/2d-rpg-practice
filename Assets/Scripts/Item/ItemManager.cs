@@ -4,7 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : MonoBehaviour, ISaveManager
 {
     public static ItemManager instance;
 
@@ -184,5 +184,22 @@ public class ItemManager : MonoBehaviour
         {
             statSlots[i].UpdateStatSlotUI();
         }
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        Debug.Log("Inventory saved.");
+
+        gameData.inventory.Clear();
+
+        foreach (KeyValuePair<ItemData, Item> pair in dictionary)
+        {
+            gameData.inventory.Add(pair.Key.itemId, pair.Value.count); // id - count
+        }
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        Debug.Log("Inventory loaded.");
     }
 }

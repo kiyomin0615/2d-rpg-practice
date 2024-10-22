@@ -6,10 +6,10 @@ using UnityEngine;
 [Serializable]
 public class GameData
 {
-    public int currency;
+    public Dictionary<string, int> inventory;
 
     public GameData()
     {
-        this.currency = 0;
+        this.inventory = new Dictionary<string, int>();
     }
 }
