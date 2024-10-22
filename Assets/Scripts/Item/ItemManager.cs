@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour, ISaveManager
@@ -22,6 +23,8 @@ public class ItemManager : MonoBehaviour, ISaveManager
     [SerializeField] Transform statSlotsParentTransform;
     [SerializeField] UI_StatSlot[] statSlots;
 
+    List<Item> loadedItems = new List<Item>();
+
     void Awake()
     {
         if (instance == null)
@@ -32,6 +35,12 @@ public class ItemManager : MonoBehaviour, ISaveManager
 
     void Start()
     {
+        Init();
+        InitInventory();
+    }
+
+    void Init()
+    {
         inventory = new List<Item>();
         equipments = new List<Item>();
 
@@ -41,6 +50,22 @@ public class ItemManager : MonoBehaviour, ISaveManager
         itemSlots = itemSlotsParentTransform.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlots = equipmentSlotsParentTransform.GetComponentsInChildren<UI_EquipmentSlot>();
         statSlots = statSlotsParentTransform.GetComponentsInChildren<UI_StatSlot>();
+    }
+
+    void InitInventory()
+    {
+        if (loadedItems != null || loadedItems.Count > 0)
+        {
+            foreach (Item item in loadedItems)
+            {
+                for (int i = 0; i < item.count; i++)
+                {
+                    AddItem(item.itemData);
+                }
+            }
+        }
+
+        return;
     }
 
     public void AddItem(ItemData itemData)
@@ -188,8 +213,6 @@ public class ItemManager : MonoBehaviour, ISaveManager
 
     public void SaveData(ref GameData gameData)
     {
-        Debug.Log("Inventory saved.");
-
         gameData.inventory.Clear();
 
         foreach (KeyValuePair<ItemData, Item> pair in dictionary)
@@ -200,6 +223,31 @@ public class ItemManager : MonoBehaviour, ISaveManager
 
     public void LoadData(GameData gameData)
     {
-        Debug.Log("Inventory loaded.");
+        foreach (KeyValuePair<string, int> pair in gameData.inventory)
+        {
+            foreach (ItemData itemData in GetItemDatabase())
+            {
+                if (itemData != null && itemData.itemId == pair.Key)
+                {
+                    Item item = new Item(itemData);
+                    item.count = pair.Value;
+                    loadedItems.Add(item);
+                }
+            }
+        }
+    }
+
+    List<ItemData> GetItemDatabase()
+    {
+        List<ItemData> itemDatabase = new List<ItemData>();
+        string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/" }); // GUID
+        foreach (string assetName in assetNames)
+        {
+            string itemPath = AssetDatabase.GUIDToAssetPath(assetName);
+            ItemData itemData = AssetDatabase.LoadAssetAtPath<ItemData>(itemPath);
+            itemDatabase.Add(itemData);
+        }
+
+        return itemDatabase;
     }
 }

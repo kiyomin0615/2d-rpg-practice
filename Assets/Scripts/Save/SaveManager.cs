@@ -36,7 +36,7 @@ public class SaveManager : MonoBehaviour
 
     public void LoadGame()
     {
-        dataHandler.Load();
+        this.gameData = dataHandler.Load();
 
         foreach (ISaveManager saveManager in saveManagers)
         {
