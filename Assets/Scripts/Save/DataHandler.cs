@@ -65,4 +65,15 @@ public class DataHandler
 
         return gameData;
     }
+
+    public void Delete()
+    {
+        string fullPath = Path.Combine(this.path, this.fileName);
+
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+            Debug.Log("Save file deleted.");
+        }
+    }
 }

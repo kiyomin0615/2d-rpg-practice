@@ -1451,7 +1451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada6e97216c17e44a8399bf9021d788a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data-file
+  fileName: save-file
 --- !u!4 &201132789
 Transform:
   m_ObjectHideFlags: 0
