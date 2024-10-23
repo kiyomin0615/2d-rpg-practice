@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SaveManager : MonoBehaviour
 {
@@ -62,6 +63,20 @@ public class SaveManager : MonoBehaviour
         Debug.Log("Game Saved.");
     }
 
+    [ContextMenu("Delete Save File")]
+    public void DeleteSaveData()
+    {
+        dataHandler = new DataHandler(Application.persistentDataPath, fileName);
+        dataHandler.Delete();
+    }
+
+    public bool HasSaveData()
+    {
+        if (dataHandler.Load() != null)
+            return true;
+        else
+            return false;
+    }
 
     void OnApplicationQuit()
     {
@@ -72,12 +87,5 @@ public class SaveManager : MonoBehaviour
     {
         IEnumerable<ISaveManager> saveManagers = FindObjectsOfType<MonoBehaviour>().OfType<ISaveManager>(); // ?
         return new List<ISaveManager>(saveManagers);
-    }
-
-    [ContextMenu("Delete Save File")]
-    void DeleteSaveData()
-    {
-        dataHandler = new DataHandler(Application.persistentDataPath, fileName);
-        dataHandler.Delete();
     }
 }
