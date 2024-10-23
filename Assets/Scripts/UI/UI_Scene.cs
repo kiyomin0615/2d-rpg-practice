@@ -10,6 +10,9 @@ public class UI_Scene : MonoBehaviour
     [SerializeField] Image dashImage;
     [SerializeField] Image dashCooldownImage;
 
+    public UI_FadeScreen fadeScreenUI;
+    public GameObject gameOverUI;
+
     float dashCooldown;
     float dashTimer;
 
@@ -52,5 +55,17 @@ public class UI_Scene : MonoBehaviour
     {
         dashTimer -= Time.deltaTime;
         dashCooldownImage.fillAmount = Mathf.Clamp(dashTimer / dashCooldown, 0, 1);
+    }
+
+    public void ShowGameOver()
+    {
+        StartCoroutine("ShowGameOverCoroutine");
+    }
+
+     IEnumerator ShowGameOverCoroutine()
+{
+        fadeScreenUI.FadeOut();
+        yield return new WaitForSeconds(1f);
+        gameOverUI.SetActive(true);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,7 @@ public class UI_MainMenu : MonoBehaviour
 {
     [SerializeField] RectTransform newGameButtonRectTransform;
     [SerializeField] GameObject continueButton;
+    [SerializeField] UI_FadeScreen fadeScreenUI;
 
     private string gameSceneName = "Game";
     
@@ -25,16 +27,23 @@ public class UI_MainMenu : MonoBehaviour
     {
         SaveManager.instance.DeleteSaveData();
 
-        SceneManager.LoadScene(gameSceneName);
+        StartCoroutine("LoadSceneWithFadeEffect", 2f);
     }
 
     public void ContinueGame()
     {
-        SceneManager.LoadScene(gameSceneName);
+        StartCoroutine("LoadSceneWithFadeEffect", 2f);
     }
 
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator LoadSceneWithFadeEffect(float duration)
+    {
+        fadeScreenUI.FadeOut();
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(gameSceneName);
     }
 }

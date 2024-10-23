@@ -11,6 +11,8 @@ public class PlayerDieState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        GameObject.Find("UI_Scene").GetComponent<UI_Scene>().ShowGameOver();
     }
 
     public override void Update()
