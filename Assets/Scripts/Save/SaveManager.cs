@@ -12,6 +12,8 @@ public class SaveManager : MonoBehaviour
     List<ISaveManager> saveManagers = new List<ISaveManager>();
     DataHandler dataHandler;
 
+    public Checkpoint[] checkpoints;
+
     [SerializeField] string fileName;
 
     void Awake()
@@ -26,6 +28,8 @@ public class SaveManager : MonoBehaviour
     {
         saveManagers = FindAllSaveManagers();
         dataHandler = new DataHandler(Application.persistentDataPath, fileName);
+
+        checkpoints = FindObjectsOfType<Checkpoint>();
 
         LoadGame();
     }
@@ -49,6 +53,8 @@ public class SaveManager : MonoBehaviour
             Debug.Log("No Game Data");
             StartNewGame();
         }
+
+        LoadCheckpoints();
     }
 
     public void SaveGame()
@@ -58,6 +64,7 @@ public class SaveManager : MonoBehaviour
             saveManager.SaveData(ref this.gameData);
         }
 
+        SaveCheckpoints();
         dataHandler.Save(this.gameData);
 
         Debug.Log("Game Saved.");
@@ -87,5 +94,65 @@ public class SaveManager : MonoBehaviour
     {
         IEnumerable<ISaveManager> saveManagers = FindObjectsOfType<MonoBehaviour>().OfType<ISaveManager>(); // ?
         return new List<ISaveManager>(saveManagers);
+    }
+
+    void SaveCheckpoints()
+    {
+        gameData.checkpointDict.Clear();
+
+        foreach (Checkpoint checkpoint in checkpoints)
+        {
+            gameData.checkpointDict.Add(checkpoint.uid, checkpoint.isActive);
+        }
+
+        gameData.closestCheckpointUID = FindClosestCheckpoint().uid;
+    }
+
+    void LoadCheckpoints()
+    {
+        Debug.Log("Load Checkpoints");
+
+        foreach (KeyValuePair<string, bool> pair in gameData.checkpointDict)
+        {
+            foreach (Checkpoint checkpoint in checkpoints)
+            {
+                if (checkpoint.uid == pair.Key && pair.Value == true)
+                {
+                    checkpoint.ActivateCheckpoint();
+                }
+            }
+        }
+
+        SpawnPlayerToCheckpoint();
+    }
+
+    Checkpoint FindClosestCheckpoint()
+    {
+        Checkpoint closestCheckpoint = null;
+
+        float closestDist = Mathf.Infinity;
+
+        foreach (Checkpoint checkpoint in checkpoints)
+        {
+            float dist = Vector2.Distance(PlayerManager.instance.transform.position, checkpoint.transform.position);
+            if (dist < closestDist && checkpoint.isActive)
+            {
+                closestDist = dist;
+                closestCheckpoint = checkpoint;
+            }
+        }
+
+        return closestCheckpoint;
+    }
+
+    void SpawnPlayerToCheckpoint()
+    {
+        foreach (Checkpoint checkpoint in checkpoints)
+        {
+            if (gameData.closestCheckpointUID == checkpoint.uid)
+            {
+                PlayerManager.instance.player.transform.position = checkpoint.transform.position;
+            }
+        }
     }
 }

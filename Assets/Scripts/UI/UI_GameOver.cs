@@ -14,6 +14,7 @@ public class UI_GameOver : MonoBehaviour
 
     public void RestartGame()
     {
+        SaveManager.instance.SaveGame();
         SceneManager.LoadScene(currenctScene.name);
     }
 }
