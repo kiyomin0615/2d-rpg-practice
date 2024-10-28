@@ -10,6 +10,7 @@ public class GameData
     public List<string> equipmentIdList;
     public SerializableDictionary<string, bool> checkpointDict;
     public string closestCheckpointUID;
+    public SerializableDictionary<string, float> volumeSettingDict;
 
     public GameData()
     {
@@ -17,5 +18,6 @@ public class GameData
         this.equipmentIdList = new List<string>();
         this.checkpointDict = new SerializableDictionary<string, bool>();
         this.closestCheckpointUID = string.Empty;
+        this.volumeSettingDict = new SerializableDictionary<string, float>();
     }
 }

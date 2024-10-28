@@ -9,7 +9,7 @@ public class Checkpoint : MonoBehaviour
     public string uid;
     public bool isActive = false;
 
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
     }
