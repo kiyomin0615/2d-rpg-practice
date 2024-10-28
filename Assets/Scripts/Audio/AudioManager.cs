@@ -4,11 +4,14 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
+    [SerializeField] float audioDistance;
+
     [SerializeField] AudioSource[] sfxList;
     [SerializeField] AudioSource[] bgmList;
     int bgmIndex;
 
     public bool isPlayingBGM = false;
+
 
     void Awake()
     {
@@ -43,8 +46,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(int index)
+    public void PlaySFX(int index, Transform target = null)
     {
+        if (sfxList[index].isPlaying)
+            return;
+
+        if (target != null && Vector2.Distance(PlayerManager.instance.player.transform.position, target.position) > audioDistance)
+            return;
+
         if (index < sfxList.Length)
         {
             sfxList[index].pitch = Random.Range(0.8f, 1.2f);

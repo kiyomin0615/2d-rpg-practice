@@ -5660,6 +5660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4153031651ebb4b8da062140830ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioDistance: 0
   sfxList:
   - {fileID: 684855235}
   - {fileID: 205648620}
@@ -5704,7 +5705,7 @@ MonoBehaviour:
   - {fileID: 1875212865}
   - {fileID: 168138332}
   - {fileID: 1665223403}
-  isPlayingBGM: 0
+  isPlayingBGM: 1
 --- !u!4 &520770773
 Transform:
   m_ObjectHideFlags: 0

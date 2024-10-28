@@ -13,7 +13,6 @@ public class PlayerAnimationEventHandler : MonoBehaviour
 
     private void OnExitAnimation()
     {
-        AudioManager.instance.PlaySFX(2);
         playerComponent.OnExitAnimation();
     }
 
