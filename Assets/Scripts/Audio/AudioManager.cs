@@ -10,8 +10,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource[] bgmList;
     int bgmIndex;
 
-    public bool isPlayingBGM = false;
-
+    public bool isPlayingBGM = true;
 
     void Awake()
     {

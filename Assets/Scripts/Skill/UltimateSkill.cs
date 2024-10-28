@@ -33,5 +33,7 @@ public class UltimateSkill : Skill
         Blackhole blackholeComponent = blackhole.GetComponent<Blackhole>();
 
         blackholeComponent.Setup(maxSize, growingSpeed, shrinkingSpeed);
+        AudioManager.instance.PlaySFX(3);
+        AudioManager.instance.PlaySFX(6);
     }
 }
