@@ -238,11 +238,13 @@ public class ItemManager : MonoBehaviour, ISaveManager
         }
     }
 
+
     public void LoadData(GameData gameData)
     {
         if (gameData == null)
             return;
 
+#if UNITY_EDITOR
         foreach (KeyValuePair<string, int> pair in gameData.inventory)
         {
             foreach (ItemData itemData in GetItemDatabase())
@@ -256,6 +258,7 @@ public class ItemManager : MonoBehaviour, ISaveManager
             }
         }
 
+
         foreach (string equipmentId in gameData.equipmentIdList)
         {
             foreach (EquipmentData equipmentData in GetEquipmentDatabase())
@@ -266,8 +269,10 @@ public class ItemManager : MonoBehaviour, ISaveManager
                 }
             }
         }
+#endif
     }
 
+#if UNITY_EDITOR
     List<ItemData> GetItemDatabase()
     {
         List<ItemData> itemDatabase = new List<ItemData>();
@@ -281,7 +286,9 @@ public class ItemManager : MonoBehaviour, ISaveManager
 
         return itemDatabase;
     }
+#endif
 
+#if UNITY_EDITOR
     List<EquipmentData> GetEquipmentDatabase()
     {
         List<EquipmentData> equipmentDatabase = new List<EquipmentData>();
@@ -295,4 +302,5 @@ public class ItemManager : MonoBehaviour, ISaveManager
 
         return equipmentDatabase;
     }
+#endif
 }

@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "2d-rpg-practice.sln"
+    "dotnet.defaultSolution": "2d-side-scrolling-game-practice.sln"
 }
